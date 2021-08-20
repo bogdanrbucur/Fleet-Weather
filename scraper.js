@@ -1,5 +1,6 @@
-const { getCoorinates } = require("parse");
+const { getCoordinates } = require("./parse");
 const puppeteer = require("puppeteer");
+let positionText;
 
 function scrape(url) {
   (async () => {
@@ -11,7 +12,7 @@ function scrape(url) {
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
     // Get text where the vessel position is written
-    const positionText = await page.$eval(".text2", (el) => el.innerText);
+    var positionText = await page.$eval(".text2", (el) => el.innerText);
 
     // Get the full HTML
     // const data = await page.evaluate(
@@ -24,7 +25,7 @@ function scrape(url) {
   })();
 }
 
-console.log(getCoorinates(positionText));
+console.log(getCoordinates(positionText));
 
 module.exports.scrape = scrape;
 // module.exports.positionText = this.positionText;
