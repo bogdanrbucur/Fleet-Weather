@@ -1,8 +1,6 @@
-const browserObject = require("./browser");
-const scraperController = require("./pageController");
+const { scrape } = require("./scraper");
 
-//Start the browser and create a browser instance
-let browserInstance = browserObject.startBrowser();
+let url =
+  "https://www.vesselfinder.com/vessels/BRO-NIBE-IMO-9322700-MMSI-220495000";
 
-// Pass the browser instance to the scraper controller
-scraperController(browserInstance);
+scrape(url);
