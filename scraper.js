@@ -12,7 +12,7 @@ function scrape(url) {
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
     // Get text where the vessel position is written
-    var positionText = await page.$eval(".text2", (el) => el.innerText);
+    positionText = await page.$eval(".text2", (el) => el.innerText);
 
     // Get the full HTML
     // const data = await page.evaluate(
@@ -25,6 +25,7 @@ function scrape(url) {
   })();
 }
 
+console.log(positionText);
 console.log(getCoordinates(positionText));
 
 module.exports.scrape = scrape;
