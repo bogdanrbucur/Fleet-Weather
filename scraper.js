@@ -1,4 +1,4 @@
-const { parse } = require("path/posix");
+const { getCoorinates } = require("parse");
 const puppeteer = require("puppeteer");
 
 function scrape(url) {
@@ -24,7 +24,7 @@ function scrape(url) {
   })();
 }
 
-parse(positionText);
+console.log(getCoorinates(positionText));
 
 module.exports.scrape = scrape;
-module.exports.positionText = this.positionText;
+// module.exports.positionText = this.positionText;

@@ -1,6 +1,10 @@
 function getSeaArea() {}
 
-function getCoorinates() {}
+function getCoorinates(text) {
+  let startIndex = text.search("coordinates") + 12;
+  let endIndex = startIndex + 23;
+  return text.splice(startIndex, endIndex);
+}
 
 function getAge() {}
 
@@ -10,4 +14,4 @@ function getSpeed() {}
 
 function getETA() {}
 
-module.exports.parse = parse;
+module.exports.getCoordinates = getCoorinates;
