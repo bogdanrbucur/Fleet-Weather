@@ -6,5 +6,5 @@ The project's objective is to create a Node.js app that continously monitors all
 
 Tools used so far:
 
-- (Node.js)[https://github.com/nodejs]
-- (Puppeteer)[https://github.com/puppeteer/puppeteer]
+- [Node.js](https://github.com/nodejs)
+- [Puppeteer](https://github.com/puppeteer/puppeteer)
