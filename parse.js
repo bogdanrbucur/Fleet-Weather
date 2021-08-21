@@ -1,3 +1,5 @@
+// Module to parse the text from the VesselFinder page
+
 function getArea(text) {
   let startIndex = text.indexOf("is at") + 6;
   let endIndex = text.indexOf("(") - 1;

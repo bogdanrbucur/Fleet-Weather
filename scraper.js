@@ -1,3 +1,5 @@
+// Module to scrape VesselFinder for the ship info
+
 const puppeteer = require("puppeteer");
 
 function scrape(shipName, shipIMO, callback) {

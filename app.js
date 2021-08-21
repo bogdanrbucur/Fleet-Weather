@@ -19,7 +19,7 @@ scrape(shipName, shipIMO, (shipInfoText) => {
   // getWeather(){}
 
   // Make a ship object with the info
-  let ship = {
+  const ship = {
     name: shipName,
     area: getArea(shipInfoText),
     coordinates: getCoordinates(shipInfoText),
