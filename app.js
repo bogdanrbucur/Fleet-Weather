@@ -5,15 +5,12 @@ let url =
   "https://www.vesselfinder.com/vessels/BRO-NIBE-IMO-9322700-MMSI-220495000";
 
 async function getPositionText(url) {
-  async () => {
-    let positionText = await scrape(url);
-    return positionText;
-  };
+  let positionText = await scrape(url);
+  console.log(positionText);
+  return positionText;
 }
 
-(async () => {
-  console.log(await getPositionText(url));
-})();
+getPositionText(url);
 
 // let coordinates = getCoordinates(positionText);
 

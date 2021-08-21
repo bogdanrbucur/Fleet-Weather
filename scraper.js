@@ -2,7 +2,6 @@ const { getCoordinates } = require("./parse");
 const puppeteer = require("puppeteer");
 
 function scrape(url) {
-  let positionText;
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -19,11 +18,11 @@ function scrape(url) {
     //   () => document.querySelector("*").outerHTML
     // );
 
-    // console.log(positionText);
+    console.log(positionText);
 
     await browser.close();
 
-    return positionText;
+    // return positionText;
   })();
 }
 
