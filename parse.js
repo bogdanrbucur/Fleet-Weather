@@ -9,7 +9,7 @@ function getArea(text) {
 
 function getCoordinates(text) {
   let startIndex = text.indexOf("coordinates") + 12;
-  let endIndex = startIndex + 22;
+  let endIndex = text.indexOf(")");
   coordinates = text.slice(startIndex, endIndex);
   return coordinates;
 }
