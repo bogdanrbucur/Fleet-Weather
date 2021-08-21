@@ -4,7 +4,7 @@ function scrape(shipName, shipIMO, callback) {
   shipName.replace(" ", "-"); // For using the name in the URL
   shipName.toUpperCase(); // For using the name in the URL
 
-  let url = `https://www.vesselfinder.com/vessels/${shipName}-IMO-${shipIMO}`;
+  const url = `https://www.vesselfinder.com/vessels/${shipName}-IMO-${shipIMO}`;
 
   (async () => {
     const browser = await puppeteer.launch();
@@ -15,8 +15,8 @@ function scrape(shipName, shipIMO, callback) {
     await page.goto(url, { waitUntil: "domcontentloaded" });
 
     // Get text where the vessel position is written
-    positionText = await page.$eval(".text2", (el) => el.innerText);
-    callback(positionText);
+    shipInfoText = await page.$eval(".text2", (el) => el.innerText);
+    callback(shipInfoText); // Give back the
 
     // Get the full HTML
     // const data = await page.evaluate(

@@ -12,7 +12,12 @@ function getCoordinates(text) {
   return coordinates;
 }
 
-function getAge() {}
+function getAge(text) {
+  let startIndex = text.indexOf("reported") + 9;
+  let endIndex = text.indexOf("ago") - 1;
+  age = text.slice(startIndex, endIndex);
+  return age;
+}
 
 function getDestination(text) {
   let startIndex = text.indexOf("en route to") + 12;
@@ -40,3 +45,4 @@ module.exports.getSpeed = getSpeed;
 module.exports.getDestination = getDestination;
 module.exports.getArea = getArea;
 module.exports.getETA = getETA;
+module.exports.getAge = getAge;
