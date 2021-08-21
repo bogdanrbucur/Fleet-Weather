@@ -22,7 +22,7 @@ function scrape(url) {
 
     await browser.close();
 
-    // return positionText;
+    return positionText;
   })();
 }
 
