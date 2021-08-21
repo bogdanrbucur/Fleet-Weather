@@ -1,8 +1,8 @@
 const { getCoordinates } = require("./parse");
 const puppeteer = require("puppeteer");
-let positionText;
 
 function scrape(url) {
+  let positionText;
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -19,14 +19,16 @@ function scrape(url) {
     //   () => document.querySelector("*").outerHTML
     // );
 
-    console.log(positionText);
+    // console.log(positionText);
 
     await browser.close();
+
+    return positionText;
   })();
 }
 
-console.log(positionText);
-console.log(getCoordinates(positionText));
+// console.log(positionText);
+// console.log(getCoordinates(positionText));
 
 module.exports.scrape = scrape;
 // module.exports.positionText = this.positionText;

@@ -1,7 +1,7 @@
 function getSeaArea() {}
 
 function getCoordinates(text) {
-  let startIndex = text.search("coordinates") + 12;
+  let startIndex = text.indexOf("coordinates") + 12;
   let endIndex = startIndex + 23;
   return text.splice(startIndex, endIndex);
 }
