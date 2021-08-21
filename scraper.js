@@ -1,6 +1,11 @@
 const puppeteer = require("puppeteer");
 
-function scrape(url, callback) {
+function scrape(shipName, shipIMO, callback) {
+  shipName.replace(" ", "-"); // For using the name in the URL
+  shipName.toUpperCase(); // For using the name in the URL
+
+  let url = `https://www.vesselfinder.com/vessels/${shipName}-IMO-${shipIMO}`;
+
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
