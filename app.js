@@ -4,13 +4,10 @@ const { scrape } = require("./scraper");
 let url =
   "https://www.vesselfinder.com/vessels/BRO-NIBE-IMO-9322700-MMSI-220495000";
 
-async function getPositionText(url) {
-  let positionText = await scrape(url);
+scrape(url, (positionText) => {
   console.log(positionText);
-  return positionText;
-}
-
-getPositionText(url);
+  console.log(getCoordinates(positionText));
+});
 
 // let coordinates = getCoordinates(positionText);
 
