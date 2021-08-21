@@ -16,7 +16,7 @@ let shipIMO = 9322700;
 scrape(shipName, shipIMO, (shipInfoText) => {
   // shipInfoText is text from the VesselFinder page where info about the ship is located
 
-  // getWeather(){}
+  // getWeather(getCoordinates(shipInfoText)){}
 
   // Make a ship object with the info
   const ship = {
