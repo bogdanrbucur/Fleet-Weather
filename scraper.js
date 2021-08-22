@@ -20,11 +20,6 @@ function scrape(name, imo, callback) {
     shipInfoText = await page.$eval(".text2", (el) => el.innerText);
     callback(shipInfoText); // Get the text from the element
 
-    // Get the full HTML
-    // const data = await page.evaluate(
-    //   () => document.querySelector("*").outerHTML
-    // );
-
     await browser.close();
   })();
 }

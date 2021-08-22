@@ -7,12 +7,15 @@ let ships = [
   new Vessel("Maersk Maru", 9581447),
 ];
 
-function main() {
-  for (const ship of ships) {
-    setTimeout(() => {
-      ship.update();
-    }, 0);
-  }
+function updateShip(i) {
+  if (i < ships.length) {
+    ships[i].update();
+  } else i = 0;
 }
 
-main();
+for (let i = 0; i < ships.length; i++) {
+  setInterval(() => {
+    console.log(i);
+    ships[i].update();
+  }, 1000);
+}
