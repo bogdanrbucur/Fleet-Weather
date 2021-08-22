@@ -11,9 +11,9 @@ const {
 const scrape = require("./scraper");
 
 class Vessel {
-  constructor(shipName, shipIMO) {
-    this.name = shipName;
-    this.imo = shipIMO;
+  constructor(name, imo) {
+    this.name = name;
+    this.imo = imo;
   }
 
   update() {

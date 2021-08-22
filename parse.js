@@ -22,15 +22,22 @@ function getAge(text) {
 }
 
 function getDestination(text) {
-  let startIndex = text.indexOf("en route to") + 12;
-  let endIndex = text.indexOf(",");
-  destination = text.slice(startIndex, endIndex);
+  if (text.indexOf("the port of") !== -1) {
+    let startIndex = text.indexOf("the port of") + 12;
+    let endIndex = text.indexOf(",");
+    destination = text.slice(startIndex, endIndex);
+  } else {
+    let startIndex = text.indexOf("en route to") + 12;
+    let endIndex = text.indexOf(",");
+    destination = text.slice(startIndex, endIndex);
+  }
+
   return destination;
 }
 
 function getSpeed(text) {
   let startIndex = text.indexOf("speed of") + 9;
-  let endIndex = startIndex + 3;
+  let endIndex = startIndex + 4;
   speed = text.slice(startIndex, endIndex);
   return speed;
 }
