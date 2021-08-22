@@ -1,14 +1,14 @@
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
+let timeFrameToUpdateAllShips = 1; // minutes within which to update all ships
+let interval = (timeFrameToUpdateAllShips / ships.length) * 60 * 1000;
+
 // DEV array to store ships
 let ships = [
   new Vessel("Bro Nibe", 9322700),
   new Vessel("Bro Nissum", 9340623),
   new Vessel("Maersk Maru", 9581447),
 ];
-
-let timeFrameToUpdateAllShips = 1; // minutes within which to update all ships
-let interval = (timeFrameToUpdateAllShips / ships.length) * 60 * 1000;
 
 // function to continously update ships in array every interval
 function updateShips() {
