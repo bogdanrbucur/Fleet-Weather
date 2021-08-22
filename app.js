@@ -11,7 +11,7 @@ function main() {
   for (const ship of ships) {
     setTimeout(() => {
       ship.update();
-    }, 2000);
+    }, 0);
   }
 }
 

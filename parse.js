@@ -39,6 +39,7 @@ function getSpeed(text) {
   let startIndex = text.indexOf("speed of") + 9;
   let endIndex = startIndex + 4;
   speed = text.slice(startIndex, endIndex);
+  speed = parseFloat(speed);
   return speed;
 }
 
