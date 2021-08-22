@@ -7,7 +7,10 @@ let ships = [
   new Vessel("Maersk Maru", 9581447),
 ];
 
-// function to continously update ships in array
+let timeFrameToUpdateAllShips = 1; // minutes within which to update all ships
+let interval = (timeFrameToUpdateAllShips / ships.length) * 60 * 1000;
+
+// function to continously update ships in array every interval
 function updateShips() {
   let i = 0;
   function updateLoop(i) {
@@ -18,10 +21,10 @@ function updateShips() {
 
     setTimeout(() => {
       updateLoop(i);
-    }, 10000);
+    }, interval);
   }
   updateLoop(i);
 }
 
-// Call function to continously cycle through all ships and update them
+// Call function to continously cycle through all ships in array and update them
 updateShips();
