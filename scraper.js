@@ -29,4 +29,4 @@ function scrape(shipName, shipIMO, callback) {
   })();
 }
 
-module.exports.scrape = scrape;
+module.exports = scrape;

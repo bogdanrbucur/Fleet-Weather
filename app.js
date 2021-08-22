@@ -6,7 +6,7 @@ const {
   getETA,
   getAge,
 } = require("./parse");
-const { scrape } = require("./scraper");
+const scrape = require("./scraper");
 
 // Temp variables
 let shipName = "Bro Nibe";
