@@ -7,15 +7,21 @@ let ships = [
   new Vessel("Maersk Maru", 9581447),
 ];
 
-function updateShip(i) {
-  if (i < ships.length) {
+// function to continously update ships in array
+function updateShips() {
+  let i = 0;
+  function updateLoop(i) {
+    if (i === ships.length) i = 0;
+
     ships[i].update();
-  } else i = 0;
+    i++;
+
+    setTimeout(() => {
+      updateLoop(i);
+    }, 10000);
+  }
+  updateLoop(i);
 }
 
-for (let i = 0; i < ships.length; i++) {
-  setInterval(() => {
-    console.log(i);
-    ships[i].update();
-  }, 1000);
-}
+// Call function to continously cycle through all ships and update them
+updateShips();
