@@ -34,4 +34,8 @@ function updateShips() {
 }
 
 // Call function to continously cycle through all ships in array and update them
-updateShips();
+// updateShips();
+
+// Read PORT from environment
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}...`));
