@@ -5,6 +5,7 @@ const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // default
+
 app.use("/", home); // for home page, use home router
 
 // DEV array to store ships
@@ -34,8 +35,10 @@ function updateShips() {
 }
 
 // Call function to continously cycle through all ships in array and update them
-// updateShips();
+updateShips();
 
 // Read PORT from environment
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+module.exports.ships = ships;
