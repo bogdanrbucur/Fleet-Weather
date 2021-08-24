@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "nodemon": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/bogdanrbucur/fleet-weather#readme",
   "dependencies": {
+    "nodemon": "^2.0.12",
     "puppeteer": "^10.2.0"
   }
 }
