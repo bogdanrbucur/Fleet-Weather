@@ -1,4 +1,11 @@
+const express = require("express");
+const app = express();
+const home = require("./routes/home");
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
+
+app.set("view engine", "pug"); // Express loads pug
+app.set("views", "./views"); // default
+app.use("/", home); // for home page, use home router
 
 // DEV array to store ships
 let ships = [
