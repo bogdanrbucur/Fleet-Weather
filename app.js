@@ -1,6 +1,6 @@
 const express = require("express");
-const app = express();
 const home = require("./routes/home");
+const app = express();
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
