@@ -12,6 +12,8 @@ html(lang="en")
         td Speed 
         td ETA 
         td Data age
+        td Current wind 
+        td Wind in 6H
       div#shiplist
         each ship in ships 
           tr#ship
@@ -23,19 +25,33 @@ html(lang="en")
           td= ship.speed
           td= ship.eta
           td= ship.dataAge
-    button(type="button" id="button" onclick="updateShips()") UPDATE
+    button(type="button" id="button" onclick="getShipsUpdate()") UPDATE
 
   script.
+    const shiplist = document.getElementById("shiplist");
+
+    function renderShipList(ships) {
+      let output = "";
+      for(let ship of ships) {
+        output+= `<tr><td>${ship.name}</td>`;
+      }
+      shiplist.innerHTML = output;
+      alert("Rendered new info");
+    }
+
+
     const Http = new XMLHttpRequest();
     const url = "http://localhost:3000/api/getships";
 
-    function updateShips() {
+    function getShipsUpdate() {
       Http.open("GET", url);
       Http.send();
 
       Http.onreadystatechange = function() {
         if(this.readyState == 4) {
         alert(Http.responseText);
+        ships = JSON.parse(Http.responseText);
+        renderShipList(ships);
         }
       }
       Http.send(null);
