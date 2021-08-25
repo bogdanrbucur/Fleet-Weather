@@ -26,11 +26,11 @@ function getDestination(text) {
     let startIndex = text.indexOf("the port of") + 12;
     let endIndex = text.indexOf(",");
     destination = text.slice(startIndex, endIndex);
-  } else {
+  } else if (text.indexOf("en route to") !== -1) {
     let startIndex = text.indexOf("en route to") + 12;
     let endIndex = text.indexOf(",");
     destination = text.slice(startIndex, endIndex);
-  }
+  } else destination = "Destination not available";
 
   return destination;
 }
@@ -46,9 +46,11 @@ function getSpeed(text) {
 }
 
 function getETA(text) {
-  let startIndex = text.indexOf("there on") + 9;
-  let endIndex = startIndex + 13;
-  eta = text.slice(startIndex, endIndex);
+  if (text.indexOf("there on") !== -1) {
+    let startIndex = text.indexOf("there on") + 9;
+    let endIndex = startIndex + 13;
+    eta = text.slice(startIndex, endIndex);
+  } else eta = "ETA not available";
   return eta;
 }
 
