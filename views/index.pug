@@ -1,7 +1,18 @@
-html
+html(lang="en")
   head
-    script(src='/javascripts/script.js')
-    title= title 
+    title= title
+    script.
+      
   body 
-     h4
-      span#tableView
+    table
+      each val in ships
+        each ship in val 
+          tr
+          td= ship.name
+          td= ship.imo
+          td= ship.area
+          td= ship.coordinates
+          td= ship.destination 
+          td= ship.speed
+          td= ship.eta
+          td= ship.dataAge
