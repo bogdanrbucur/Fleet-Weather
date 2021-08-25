@@ -1,13 +1,20 @@
 html(lang="en")
   head
     title= title
-    script.
-      
   body 
     table
-      each val in ships
-        each ship in val 
-          tr
+      tr
+        td Ship Name
+        td IMO Number 
+        td Location 
+        td Coordinates 
+        td Destination 
+        td Speed 
+        td ETA 
+        td Data age
+      div#shiplist
+        each ship in ships 
+          tr#ship
           td= ship.name
           td= ship.imo
           td= ship.area
@@ -16,3 +23,20 @@ html(lang="en")
           td= ship.speed
           td= ship.eta
           td= ship.dataAge
+    button(type="button" id="button" onclick="updateShips()") UPDATE
+
+  script.
+    const Http = new XMLHttpRequest();
+    const url = "http://localhost:3000/api/getships";
+
+    function updateShips() {
+      Http.open("GET", url);
+      Http.send();
+
+      Http.onreadystatechange = function() {
+        if(this.readyState == 4) {
+        alert(Http.responseText);
+        }
+      }
+      Http.send(null);
+      }

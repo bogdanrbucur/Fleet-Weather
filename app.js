@@ -7,6 +7,7 @@ app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // default
 
 app.use("/", home); // for home page, use home router
+app.use("/api/getships", home); // for home page, use home router
 
 // DEV array to store ships
 let ships = [
