@@ -3,6 +3,11 @@ const url = "http://localhost:3000/api/getships"; // endpoint to get updated shi
 
 const shiplistDiv = document.querySelector("div.shiplist"); // Find the shiplist div in pug
 
+// Update ships every 5 min
+setInterval(function () {
+  getShipsUpdate();
+}, 60000);
+
 let tableHeaders = [
   "Ship Name",
   "IMO Number",
