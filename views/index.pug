@@ -1,59 +1,8 @@
 html(lang="en")
   head
-    title= title
-  body 
-    table
-      th
-        tr
-          td Ship Name
-          td IMO Number 
-          td Location 
-          td Coordinates 
-          td Destination 
-          td Speed 
-          td ETA 
-          td Data age
-          td Current wind 
-          td Wind in 6H
-      tb#shiplist
-        each ship in ships 
-          tr#ship
-            td= ship.name
-            td= ship.imo
-            td= ship.area
-            td#ship-coordinates= ship.coordinates
-            td= ship.destination 
-            td= ship.speed
-            td= ship.eta
-            td= ship.dataAge
+    title Fleet Weather
+  body
+    div.shiplist 
     button(type="button" id="button" onclick="getShipsUpdate()") UPDATE
-
-  script.
-    const shiplist = document.getElementById("shiplist");
-
-    function renderShipList(ships) {
-      let output = `<td id="shiplist">`;
-      for(let ship of ships) {
-        document.getElementByID("ship-coordinates").innerHTML = ship.coordinates;
-        alert(document.getElementByID("ship-coordinates").innerHTML);
-      }
-      //- shiplist.innerHTML = output;
-      alert(shiplist.innerHTML);
-    }
-
-
-    const Http = new XMLHttpRequest();
-    const url = "http://localhost:3000/api/getships";
-
-    function getShipsUpdate() {
-      Http.open("GET", url);
-      Http.send();
-
-      Http.onreadystatechange = function() {
-        if(this.readyState == 4) {
-        ships = JSON.parse(Http.responseText);
-        renderShipList(ships);
-        }
-      }
-      Http.send(null);
-      }
+    script 
+      include script.js
