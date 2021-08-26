@@ -11,5 +11,5 @@ Tools used:
 - [Puppeteer](https://github.com/puppeteer/puppeteer) for web scrapping
 - [Pug](https://github.com/pugjs) as template engine
 
-![](https://imgur.com/a/cR9ozZu)
+![](https://imgur.com/jpZT5I0)
 Style and weather scrapping are not yet implemented.
