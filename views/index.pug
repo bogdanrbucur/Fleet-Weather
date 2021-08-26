@@ -21,7 +21,7 @@ html(lang="en")
             td= ship.name
             td= ship.imo
             td= ship.area
-            td#ship.coordinates= ship.coordinates
+            td#ship-coordinates= ship.coordinates
             td= ship.destination 
             td= ship.speed
             td= ship.eta
@@ -34,9 +34,10 @@ html(lang="en")
     function renderShipList(ships) {
       let output = `<td id="shiplist">`;
       for(let ship of ships) {
-        document.getElementByID("ship.coordinates").innerHTML = ship.coordinates;
+        document.getElementByID("ship-coordinates").innerHTML = ship.coordinates;
+        alert(document.getElementByID("ship-coordinates").innerHTML);
       }
-      shiplist.innerHTML = output;
+      //- shiplist.innerHTML = output;
       alert(shiplist.innerHTML);
     }
 
