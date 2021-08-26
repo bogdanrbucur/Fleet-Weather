@@ -10,3 +10,6 @@ Tools used:
 - [Express.js](https://github.com/expressjs/express) for HTTP communication with the client
 - [Puppeteer](https://github.com/puppeteer/puppeteer) for web scrapping
 - [Pug](https://github.com/pugjs) as template engine
+
+![](https://imgur.com/a/cR9ozZu)
+Style and weather scrapping are not yet implemented.
