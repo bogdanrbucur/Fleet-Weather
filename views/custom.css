@@ -9,10 +9,6 @@ h2 {
   margin-bottom: 50px;
 }
 
-thead {
-  padding: 12px;
-}
-
 .shiplistTable {
   border-collapse: collapse;
   border-spacing: 10 20px;
@@ -20,7 +16,7 @@ thead {
 
 .shiplistTableHeaderRow {
   text-align: center;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 .shiplistTableBodyRow {
@@ -34,10 +30,11 @@ thead {
 }
 
 td {
-  padding-bottom: 12px;
+  padding-top: 1em;
+  padding-bottom: 1em;
   margin-bottom: 10px;
   text-align: center;
-  font-weight: normal;
+  font-weight: 400;
 }
 
 footer a {
