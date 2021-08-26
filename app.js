@@ -4,7 +4,7 @@ const app = express();
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
-app.set("views", "./views"); // default
+app.set("views", "./views"); // Set views path
 
 app.use("/", home); // for home page, use home router
 app.use("/api/getships", home); // for home page, use home router
