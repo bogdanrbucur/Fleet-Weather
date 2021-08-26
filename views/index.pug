@@ -1,8 +1,10 @@
 html(lang="en")
   head
-    title Fleet Weather
+    title= title
   body
     div.shiplist 
     button(type="button" id="button" onclick="getShipsUpdate()") UPDATE
     script 
       include script.js
+    script.
+      document.onload = getShipsUpdate();

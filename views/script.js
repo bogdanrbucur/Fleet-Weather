@@ -1,4 +1,4 @@
-const Http = new XMLHttpRequest();
+const Http = new XMLHttpRequest(); // new object for AJAX magic
 const url = "http://localhost:3000/api/getships"; // endpoint to get updated ship info
 
 const shiplistDiv = document.querySelector("div.shiplist"); // Find the shiplist div in pug
@@ -16,7 +16,7 @@ let tableHeaders = [
   "Wind in 6H",
 ];
 
-const createShiplistTable = () => {
+function createShiplistTable() {
   while (shiplistDiv.firstChild)
     shiplistDiv.removeChild(shiplistDiv.firstChild); // Remove all children from scoreboard div (if any)
 
@@ -41,10 +41,10 @@ const createShiplistTable = () => {
   let shiplistTableBody = document.createElement("tbody"); // Creates the table body group element
   shiplistTableBody.className = "shiplistTable-Body";
   shiplistTable.append(shiplistTableBody); // Appends the table body group element to the table
-  shiplistDiv.append(shiplistTable); // Appends the table to the scoreboard div
-};
-// The function below will accept a single score and its index to create the global ranking
-const appendShips = (ship) => {
+  shiplistDiv.append(shiplistTable); // Appends the table to the shiplist div
+}
+// Function below appends each ship row with its cells
+function appendShips(ship) {
   const shiplistTable = document.querySelector(".shiplistTable"); // Find the table we created
   let shiplistTableBodyRow = document.createElement("tr"); // Create the current table row
   shiplistTableBodyRow.className = "shiplistTableBodyRow";
@@ -66,7 +66,6 @@ const appendShips = (ship) => {
   shipETA.innerText = ship.eta;
   let shipDataAge = document.createElement("td");
   shipDataAge.innerText = ship.dataAge;
-
   // let shipWind = document.createElement("td");
   // shipWind.innerText = ship.wind;
   // let shipWind6H = document.createElement("td");
@@ -83,7 +82,7 @@ const appendShips = (ship) => {
     shipDataAge
   ); // Append all cells to the table row
   shiplistTable.append(shiplistTableBodyRow); // Append the current row to the scoreboard table body
-};
+}
 
 // HTTP GET method to update ships data
 function getShipsUpdate() {
