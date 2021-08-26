@@ -9,17 +9,21 @@ h2 {
   margin-bottom: 50px;
 }
 
+thead {
+  padding: 12px;
+}
+
 .shiplistTable {
   border-collapse: collapse;
   border-spacing: 10 20px;
 }
 
 .shiplistTableHeaderRow {
-  background: lightgrey;
+  text-align: center;
+  font-weight: normal;
 }
 
 .shiplistTableBodyRow {
-  padding: 10px;
   margin-bottom: 10px;
   opacity: 1;
   transition: 0.4s;
@@ -30,7 +34,10 @@ h2 {
 }
 
 td {
-  padding: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: normal;
 }
 
 footer a {
