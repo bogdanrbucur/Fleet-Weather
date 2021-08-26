@@ -16,8 +16,8 @@ let ships = [
   new Vessel("Maersk Maru", 9581447),
 ];
 
-let timeFrameToUpdateAllShips = 1; // minutes within which to update all ships
-let interval = (timeFrameToUpdateAllShips / ships.length) * 60 * 1000;
+let intervalToUpdateAllShips = 1; // minutes within which to update all ships
+let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
 
 // function to continously update ships in array every interval
 function updateShips() {
