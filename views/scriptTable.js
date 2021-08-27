@@ -12,11 +12,11 @@ setInterval(function () {
   getShipsUpdate();
 }, interval);
 
-// Every minute update the "Updated x ago"
+// Every 30 seconds update the "Updated x ago"
 setInterval(function () {
   document.getElementById("updated-time").innerHTML =
     "Updated " + moment(timeOfUpdate).fromNow();
-}, 10000);
+}, 30000);
 
 let tableHeaders = [
   "Ship Name",
