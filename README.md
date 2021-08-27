@@ -12,5 +12,5 @@ Tools used:
 - [Pug](https://github.com/pugjs) as template engine
 - [Bootstrap](https://github.com/twbs/bootstrap)
 
-![WIP](https://i.imgur.com/jpZT5I0.jpg)
+![WIP](https://i.imgur.com/nJzY3wi.jpeg)
 Style and weather scrapping are not yet implemented. Data gets updated automatically without refreshing the page.
