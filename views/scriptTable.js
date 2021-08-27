@@ -6,9 +6,17 @@ const shiplistDiv = document.querySelector("div.shiplist"); // Find the shiplist
 const intervalToUpdateShipInfo = 1; // minutes within which to update all ships
 const interval = intervalToUpdateShipInfo * 60 * 1000;
 
+let timeOfUpdate = new Date();
+
 setInterval(function () {
   getShipsUpdate();
 }, interval);
+
+// Every minute update the "Updated x ago"
+setInterval(function () {
+  document.getElementById("updated-time").innerHTML =
+    "Updated " + moment(timeOfUpdate).fromNow();
+}, 10000);
 
 let tableHeaders = [
   "Ship Name",
@@ -107,6 +115,9 @@ function getShipsUpdate() {
       for (const ship of ships) {
         appendShips(ship); // Creates and appends each row to the table body
       }
+      timeOfUpdate = new Date();
+      document.getElementById("updated-time").innerHTML =
+        "Updated " + moment(timeOfUpdate).fromNow(); // Refresh the "Updated x ago"
     }
   };
 

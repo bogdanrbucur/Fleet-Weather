@@ -10,7 +10,8 @@ Tools used:
 - [Express.js](https://github.com/expressjs/express) for HTTP communication with the client
 - [Puppeteer](https://github.com/puppeteer/puppeteer) for web scrapping
 - [Pug](https://github.com/pugjs) as template engine
-- [Bootstrap](https://github.com/twbs/bootstrap)
+- [Bootstrap](https://github.com/twbs/bootstrap) for styling and reactive design
+- [Moment](https://github.com/moment/moment/) for keeping track of elapsed time
 
 ![WIP](https://i.imgur.com/nJzY3wi.jpeg)
 Style and weather scrapping are not yet implemented. Data gets updated automatically without refreshing the page.
