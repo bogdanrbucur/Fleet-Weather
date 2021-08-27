@@ -2,7 +2,7 @@
 
 const puppeteer = require("puppeteer");
 
-function scrape(name, imo, callback) {
+function getShipInfo(name, imo, callback) {
   name.replace(" ", "-"); // For using the name in the URL
   name.toUpperCase(); // For using the name in the URL
 
@@ -24,4 +24,4 @@ function scrape(name, imo, callback) {
   })();
 }
 
-module.exports = scrape;
+module.exports = getShipInfo;

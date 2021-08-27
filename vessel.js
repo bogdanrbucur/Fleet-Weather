@@ -8,7 +8,7 @@ const {
   getETA,
   getAge,
 } = require("./parse");
-const scrape = require("./scraper");
+const scrape = require("./getShipInfo");
 
 class Vessel {
   constructor(name, imo) {

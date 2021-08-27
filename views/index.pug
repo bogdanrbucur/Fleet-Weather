@@ -4,9 +4,15 @@ html(lang="en")
     title= title
 
     //- Bootstrap CSS
-    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous")
-    
-    link(rel="icon" href="static/favicon.png")
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous")
+    script(type='text/javascript' src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous")
+
+    link(rel="icon" href="./favicon.png")
+
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet")
+
     style 
       include custom.css
 
@@ -16,8 +22,9 @@ html(lang="en")
         div.col-md-12
           h2 Fleet Weather
       div.row
-        div.col-md-12
-          div.shiplist 
+        .col-md-12 
+          h6#updated-time
+      div.shiplist
     script 
       include scriptTable.js
     script.

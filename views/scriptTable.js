@@ -27,38 +27,41 @@ function createShiplistTable() {
   while (shiplistDiv.firstChild)
     shiplistDiv.removeChild(shiplistDiv.firstChild); // Remove all children from scoreboard div (if any)
 
-  let shiplistTable = document.createElement("table"); // Create the table itself
-  shiplistTable.className = "shiplistTable";
+  let shiplistTable = document.createElement("table"); // Create the table itself.
+  shiplistTable.className = "table"; // Class name as per Bootstrap
+  shiplistTable.id = "shiplistTable";
 
   let shiplistTableHead = document.createElement("thead"); // Creates the table header group element
-  shiplistTableHead.className = "shiplistTableHead";
+  shiplistTableHead.id = "shiplistTableHead";
 
   let shiplistTableHeaderRow = document.createElement("tr"); // Creates the row that will contain the headers
-  shiplistTableHeaderRow.className = "shiplistTableHeaderRow";
+  shiplistTableHeaderRow.id = "shiplistTableHeaderRow";
 
   // Will iterate over all the strings in the tableHeader array and will append the header cells to the table header row
   tableHeaders.forEach((header) => {
     let shiplistHeader = document.createElement("th"); // Creates the current header cell during a specific iteration
     shiplistHeader.innerText = header;
+    shiplistHeader.setAttribute("scope", "col"); // For Bootstrap
     shiplistTableHeaderRow.append(shiplistHeader); // Appends the current header cell to the header row
   });
   shiplistTableHead.append(shiplistTableHeaderRow); // Appends the header row to the table header group element
   shiplistTable.append(shiplistTableHead);
 
   let shiplistTableBody = document.createElement("tbody"); // Creates the table body group element
-  shiplistTableBody.className = "shiplistTable-Body";
+  shiplistTableBody.id = "shiplistTable-Body";
   shiplistTable.append(shiplistTableBody); // Appends the table body group element to the table
   shiplistDiv.append(shiplistTable); // Appends the table to the shiplist div
 }
 // Function below appends each ship row with its cells
 function appendShips(ship) {
-  const shiplistTable = document.querySelector(".shiplistTable"); // Find the table we created
+  const shiplistTable = document.querySelector(".table"); // Find the table we created
   let shiplistTableBodyRow = document.createElement("tr"); // Create the current table row
-  shiplistTableBodyRow.className = "shiplistTableBodyRow";
+  shiplistTableBodyRow.id = "shiplistTableBodyRow";
 
   // Below lines create the column cells that will be appended to the current table row
-  let shipName = document.createElement("td");
+  let shipName = document.createElement("th");
   shipName.innerText = ship.name;
+  shipName.setAttribute("scope", "row"); // For Bootstrap
   let shipIMO = document.createElement("td");
   shipIMO.innerText = ship.imo;
   let shipArea = document.createElement("td");

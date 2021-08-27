@@ -3,36 +3,43 @@
 body {
   background: #ffffff;
   margin-top: 40px;
+  font-family: "Poppins", sans-serif;
 }
 
 h2 {
   margin-bottom: 50px;
 }
 
-.shiplistTable {
+#shiplistTable {
   border-collapse: collapse;
   border-spacing: 10 20px;
 }
 
-.shiplistTableHeaderRow {
+#shiplistTableHead {
   text-align: center;
-  font-weight: 400;
+  font-weight: 600;
 }
 
-.shiplistTableBodyRow {
+#shiplistTableBodyRow {
   margin-bottom: 10px;
   opacity: 1;
   transition: 0.4s;
+  font-weight: 400;
 }
 
-.shiplistTableBodyRow:hover {
+#shiplistTableBodyRow:hover {
   background-color: #e7e7e7; /* Gray */
 }
 
+[scope="row"] {
+  text-align: center;
+  font-weight: 600;
+}
+
 td {
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin-bottom: 10px;
+  padding-top: 1.1em;
+  padding-bottom: 1.1em;
+  /* margin-bottom: 10px; */
   text-align: center;
   font-weight: 400;
 }
