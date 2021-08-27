@@ -1,5 +1,6 @@
 html(lang="en")
   head
+    meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title= title
 
@@ -7,7 +8,8 @@ html(lang="en")
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous")
     script(type='text/javascript' src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous")
 
-    link(rel="icon" href="./favicon.png")
+    //- Favicon 
+    link(rel="icon" type="image/png" href="/static/favicon.png")
 
     //- Google Poppins font
     link(rel="preconnect" href="https://fonts.googleapis.com")
@@ -17,8 +19,9 @@ html(lang="en")
     //- Moment
     script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer")
 
+    //- Custom styles to overwrite Bootstrap
     style 
-      include custom.css
+      include ./static/custom.css
 
   body
     div.container
@@ -31,5 +34,7 @@ html(lang="en")
       div.shiplist
     script 
       include scriptTable.js
+
+    //- Render the ship table
     script.
       document.onload = getShipsUpdate();
