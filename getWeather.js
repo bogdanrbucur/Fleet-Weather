@@ -1,12 +1,34 @@
 // Module to get the weather in ship's position
 
-const puppeteer = require("puppeteer");
+const puppeteer = require("./getShipInfo");
 
-function getShipInfo(name, imo, callback) {
-  name.replace(" ", "-"); // For using the name in the URL
-  name.toUpperCase(); // For using the name in the URL
+function getWeather(coordinates, callback) {
+  coordArray = coordinates.split("/"); // For using the name in the URL
+  lat = coordArray[0];
+  long = coordArray[1];
 
-  const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
+  lat.replace(" ", "");
+  long.replace(" ", "");
+
+  // If latitude is N
+  if (lat.includes("N")) {
+    lat.replace("N", "");
+    // If latitude is S
+  } else {
+    lat.replace("S", "");
+    lat = "-" + lat;
+  }
+
+  // If longitude is E
+  if (long.includes("E")) {
+    long.replace("E", "");
+    // If longitude is W
+  } else {
+    long.replace("W", "");
+    long = "-" + long;
+  }
+
+  const url = `https://www.windy.com/${lat}/${long}/meteogram?${lat},${long},6,i:pressure`;
 
   (async () => {
     const browser = await puppeteer.launch();

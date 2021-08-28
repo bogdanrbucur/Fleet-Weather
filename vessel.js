@@ -8,7 +8,8 @@ const {
   getETA,
   getAge,
 } = require("./parse");
-const scrape = require("./getShipInfo");
+const getShipInfo = require("./getShipInfo");
+const getWeather = require("./getWeather");
 
 class Vessel {
   constructor(name, imo) {
@@ -17,7 +18,7 @@ class Vessel {
   }
 
   update() {
-    scrape(this.name, this.imo, (shipInfoText) => {
+    getShipInfo(this.name, this.imo, (shipInfoText) => {
       // shipInfoText is text from the VesselFinder page where info about the ship is located
       // update vessel properties based on scraped data
       this.area = getArea(shipInfoText);

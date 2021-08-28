@@ -25,3 +25,4 @@ function getShipInfo(name, imo, callback) {
 }
 
 module.exports = getShipInfo;
+module.exports = puppeteer;
