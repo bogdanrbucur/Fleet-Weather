@@ -1,5 +1,7 @@
 // Module contains the vessel class
 
+const debug = require("debug")("app:vessel"); // $env:DEBUG="app:vessel" to see
+
 const {
   getSpeed,
   getCoordinates,
@@ -9,7 +11,7 @@ const {
   getAge,
 } = require("./parse");
 const getShipInfo = require("./getShipInfo");
-const getWeather = require("./getWeather");
+// const getWeather = require("./getWeather");
 
 class Vessel {
   constructor(name, imo) {
@@ -30,8 +32,7 @@ class Vessel {
 
       // getWeather(getCoordinates(shipInfoText)){}
 
-      // For dev purposes
-      console.log(this);
+      debug(this);
     });
   }
 }

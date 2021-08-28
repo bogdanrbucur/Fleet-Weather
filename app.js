@@ -2,6 +2,7 @@ const express = require("express");
 const home = require("./routes/home");
 const app = express();
 const cors = require("cors");
+const debug = require("debug")("app:main"); // $env:DEBUG="app:*" to see all debugs
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
@@ -27,7 +28,7 @@ function updateShips() {
   let i = 0;
   function updateLoop(i) {
     if (i === ships.length) i = 0;
-
+    debug(`Updating ship ${ships[i].name}.`);
     ships[i].update();
     i++;
 
@@ -43,6 +44,6 @@ updateShips();
 
 // Read PORT from environment
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(port, () => debug(`Listening on port ${port}...`));
 
 module.exports.ships = ships;

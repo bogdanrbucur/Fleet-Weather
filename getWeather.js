@@ -1,6 +1,7 @@
 // Module to get the weather in ship's position
 
-const puppeteer = require("./getShipInfo");
+const puppeteer = require("puppeteer");
+const debug = require("debug")("app:getWeather");
 
 function getWeather(coordinates, callback) {
   coordArray = coordinates.split("/"); // For using the name in the URL
@@ -9,6 +10,9 @@ function getWeather(coordinates, callback) {
 
   lat.replace(" ", "");
   long.replace(" ", "");
+
+  debug(`Lat: ${lat}`);
+  debug(`Long: ${long}`);
 
   // If latitude is N
   if (lat.includes("N")) {
@@ -29,6 +33,7 @@ function getWeather(coordinates, callback) {
   }
 
   const url = `https://www.windy.com/${lat}/${long}/meteogram?${lat},${long},6,i:pressure`;
+  debug(`Windy URL: ${url}`);
 
   (async () => {
     const browser = await puppeteer.launch();
@@ -46,4 +51,4 @@ function getWeather(coordinates, callback) {
   })();
 }
 
-module.exports = getWeather;
+// module.exports = getWeather;
