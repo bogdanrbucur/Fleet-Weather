@@ -1,13 +1,16 @@
 const express = require("express");
 const home = require("./routes/home");
 const app = express();
+const cors = require("cors");
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
+app.use(cors()); // enable CORS for all routes
 app.use("/", home); // for home page, use home router
 app.use("/api/getships", home); // for home page, use home router
+app.options("/api/getships", cors()); // enable pre-flight request for this route
 
 // DEV array to store ships
 let ships = [
