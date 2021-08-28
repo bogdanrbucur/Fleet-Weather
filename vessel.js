@@ -11,7 +11,7 @@ const {
   getAge,
 } = require("./parse");
 const getShipInfo = require("./getShipInfo");
-// const getWeather = require("./getWeather");
+const getWeather = require("./getWeather");
 
 class Vessel {
   constructor(name, imo) {
@@ -30,7 +30,9 @@ class Vessel {
       this.eta = getETA(shipInfoText);
       this.dataAge = getAge(shipInfoText);
 
-      // getWeather(getCoordinates(shipInfoText)){}
+      getWeather(getCoordinates(shipInfoText), (weather) => {
+        debug(weather);
+      });
 
       debug(this);
     });
