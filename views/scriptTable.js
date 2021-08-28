@@ -105,6 +105,7 @@ function appendShips(ship) {
 // HTTP GET method to update ships data
 function getShipsUpdate() {
   Http.open("GET", url);
+  Http.setRequestHeader("Access-Control-Allow-Headers", "Accept");
   Http.send();
 
   Http.onreadystatechange = function () {
