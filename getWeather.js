@@ -46,4 +46,4 @@ function getWeather(coordinates, callback) {
   })();
 }
 
-module.exports = getShipInfo;
+module.exports = getWeather;

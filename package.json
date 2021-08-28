@@ -19,6 +19,7 @@
   "homepage": "https://github.com/bogdanrbucur/fleet-weather#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "debug": "^4.3.2",
     "express": "^4.17.1",
     "pug": "^3.0.2",
     "puppeteer": "^10.2.0"
