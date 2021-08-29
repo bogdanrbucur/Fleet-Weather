@@ -11,7 +11,8 @@ Tools used:
 - [Puppeteer](https://github.com/puppeteer/puppeteer) for web scrapping
 - [Pug](https://github.com/pugjs) as template engine
 - [Bootstrap](https://github.com/twbs/bootstrap) for styling and reactive design
-- [Moment](https://github.com/moment/moment/) for keeping track of elapsed time
+- [Moment](https://github.com/moment/moment/) for keeping track of elapsed time on client side
+- [Debug](https://www.npmjs.com/package/debug) for debugging on server side
 
 ![WIP](https://i.imgur.com/826MJ0X.jpg)
 Style is not definitive. Data gets updated automatically without refreshing the page.
