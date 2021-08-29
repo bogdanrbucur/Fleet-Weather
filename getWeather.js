@@ -32,7 +32,7 @@ function getWeather(coordinates, callback) {
     long = "-" + long;
   }
 
-  const url = `https://www.windy.com/${lat}/${long}?${lat},${long},6`;
+  const url = `https://www.windy.com/${lat}/${long}?${lat},${long}`;
   debug(`Windy URL: ${url}`);
 
   (async () => {
@@ -42,14 +42,18 @@ function getWeather(coordinates, callback) {
     await page.setUserAgent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
     );
-    await page.goto(url, { waitUntil: "networkidle0" });
+    await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
     debug(`Opened ${url}`);
 
-    // Get wind at present time
-    weather = await page.$eval(
-      ".td-gust height-gust d-display-table",
-      (el) => el.innerText
-    );
+    let weather = await page.evaluate(() => {
+      // Get the DOM element that holds the wind gusts data
+      let windGustText = document.getElementsByClassName(
+        "td-gust height-gust d-display-table"
+      );
+
+      let windGusts = windGustText[0].innerText.split("\t"); // Split string by \t (TAB) into all the wind gusts every 3 hours
+      return windGusts;
+    });
 
     callback(weather); // Get the text from the element
 

@@ -16,7 +16,7 @@ function getShipInfo(name, imo, callback) {
     await page.setUserAgent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
     );
-    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.goto(url, { waitUntil: "networkidle2" });
     debug(`Opened ${url}`);
 
     // Get text where the vessel position is written (div class="text2")
