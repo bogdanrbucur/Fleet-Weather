@@ -86,24 +86,30 @@ function appendShips(ship) {
   shipDataAge.innerText = ship.dataAge;
 
   // Weather data and conditional formatting
+  // Wind now
   let shipWindNow = document.createElement("td");
+  // Make a circle in the table cell
   let shipWindNowCircle = document.createElement("span");
   shipWindNowCircle.className = "WindCircle";
   shipWindNowCircle.innerText = ship.windNow;
   shipWindNow.append(shipWindNowCircle);
 
+  // Circle conditional formatting
   if (ship.windNow <= 16) shipWindNowCircle.id = "CircleGreen";
   else if (ship.windNow <= 27) shipWindNowCircle.id = "CircleYellow";
   else if (ship.windNow <= 40) shipWindNowCircle.id = "CircleOrange";
   else if (ship.windNow <= 50) shipWindNowCircle.id = "CircleRed";
   else shipWindNowCircle.id = "CirclePurple";
 
+  // Wind in 6 hours
   let shipWind6H = document.createElement("td");
+  // Make a circle in the table cell
   let shipWind6HCircle = document.createElement("span");
   shipWind6HCircle.className = "WindCircle";
   shipWind6HCircle.innerText = ship.wind6H;
   shipWind6H.append(shipWind6HCircle);
 
+  // Circle conditional formatting
   if (ship.shipWind6H <= 16) shipWind6HCircle.id = "CircleGreen";
   else if (ship.wind6H <= 27) shipWind6HCircle.id = "CircleYellow";
   else if (ship.wind6H <= 40) shipWind6HCircle.id = "CircleOrange";
