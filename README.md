@@ -16,3 +16,5 @@ Tools used:
 
 ![WIP](https://i.imgur.com/826MJ0X.jpg)
 Style is not definitive. Data gets updated automatically without refreshing the page.
+
+It currently runs on my Raspberry Pi 4 and it needs its own branch because Puppeteer needs a launch parameter on Rasberry OS for Chromium's location.
