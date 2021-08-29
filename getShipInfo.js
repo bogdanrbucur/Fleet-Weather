@@ -10,7 +10,9 @@ function getShipInfo(name, imo, callback) {
   const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
 
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: "/usr/bin/chromium-browser",
+    });
     debug(`Puppeteer launch for VesselFinder.`);
     const page = await browser.newPage();
     await page.setUserAgent(
