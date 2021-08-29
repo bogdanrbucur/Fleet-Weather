@@ -29,12 +29,6 @@ class Vessel {
       this.destination = getDestination(shipInfoText);
       this.eta = getETA(shipInfoText);
       this.dataAge = getAge(shipInfoText);
-      // this.windNow = getWeather(this.coordinates, (weather) => {
-      //   return weather[3];
-      // });
-      // this.wind6H = getWeather(this.coordinates, (weather) => {
-      //   return weather[5];
-      // });
 
       getWeather(this.coordinates, (weather) => {
         debug(`Got weather:${weather}`);
@@ -42,9 +36,16 @@ class Vessel {
         debug(`Wind 6H: ${weather[5]}`);
         this.windNow = weather[3]; // Corresponds to the wind gusts now in Windy
         this.wind6H = weather[5]; // Corresponds to the wind gusts in 6H in Windy
+        debug(this);
       });
 
-      debug(this);
+      // this.windNow = getWeather(this.coordinates, (weather) => {
+      //   return weather[3];
+      // });
+      // this.wind6H = getWeather(this.coordinates, (weather) => {
+      //   return weather[5];
+      // });
+
     });
   }
 }
