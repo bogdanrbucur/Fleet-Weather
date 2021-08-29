@@ -27,8 +27,8 @@ let tableHeaders = [
   "Speed",
   "ETA",
   "Data age",
-  "Current wind",
-  "Wind in 6H",
+  "Current wind [Kts]",
+  "Wind in 6H [Kts]",
 ];
 
 function createShiplistTable() {
@@ -84,11 +84,33 @@ function appendShips(ship) {
   shipETA.innerText = ship.eta;
   let shipDataAge = document.createElement("td");
   shipDataAge.innerText = ship.dataAge;
-  // let shipWind = document.createElement("td");
-  // shipWind.innerText = ship.wind;
-  // let shipWind6H = document.createElement("td");
-  // shipWind6H.innerText = ship.shipWind6H;
 
+  // Weather data and conditional formatting
+  let shipWindNow = document.createElement("td");
+  let shipWindNowCircle = document.createElement("span");
+  shipWindNowCircle.className = "WindCircle";
+  shipWindNowCircle.innerText = ship.windNow;
+  shipWindNow.append(shipWindNowCircle);
+
+  if (ship.windNow <= 16) shipWindNowCircle.id = "CircleGreen";
+  else if (ship.windNow <= 27) shipWindNowCircle.id = "CircleYellow";
+  else if (ship.windNow <= 40) shipWindNowCircle.id = "CircleOrange";
+  else if (ship.windNow <= 50) shipWindNowCircle.id = "CircleRed";
+  else shipWindNowCircle.id = "CirclePurple";
+
+  let shipWind6H = document.createElement("td");
+  let shipWind6HCircle = document.createElement("span");
+  shipWind6HCircle.className = "WindCircle";
+  shipWind6HCircle.innerText = ship.wind6H;
+  shipWind6H.append(shipWind6HCircle);
+
+  if (ship.shipWind6H <= 16) shipWind6HCircle.id = "CircleGreen";
+  else if (ship.wind6H <= 27) shipWind6HCircle.id = "CircleYellow";
+  else if (ship.wind6H <= 40) shipWind6HCircle.id = "CircleOrange";
+  else if (ship.wind6H <= 50) shipWind6HCircle.id = "CircleRed";
+  else shipWind6HCircle.id = "CirclePurple";
+
+  // Append all data to row
   shiplistTableBodyRow.append(
     shipName,
     shipIMO,
@@ -97,7 +119,9 @@ function appendShips(ship) {
     shipDestination,
     shipSpeed,
     shipETA,
-    shipDataAge
+    shipDataAge,
+    shipWindNow,
+    shipWind6H
   ); // Append all cells to the table row
   shiplistTable.append(shiplistTableBodyRow); // Append the current row to the scoreboard table body
 }

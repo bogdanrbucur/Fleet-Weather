@@ -37,7 +37,7 @@ function getWeather(coordinates, callback) {
 
   (async () => {
     const browser = await puppeteer.launch();
-    debug(`Puppeteer launch.`);
+    debug(`Puppeteer launch for Windy.`);
     const page = await browser.newPage();
     await page.setUserAgent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
@@ -52,13 +52,13 @@ function getWeather(coordinates, callback) {
       );
 
       let windGusts = windGustText[0].innerText.split("\t"); // Split string by \t (TAB) into all the wind gusts every 3 hours
-      return windGusts;
+      return windGusts; // return array with all wind gusts
     });
 
-    callback(weather); // Get the text from the element
+    callback(weather); // return wind gusts array
 
     await browser.close();
-    debug(`Closed Chromium.`);
+    debug(`Closed Windy.`);
   })();
 }
 
