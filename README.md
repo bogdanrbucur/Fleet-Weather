@@ -13,5 +13,5 @@ Tools used:
 - [Bootstrap](https://github.com/twbs/bootstrap) for styling and reactive design
 - [Moment](https://github.com/moment/moment/) for keeping track of elapsed time
 
-![WIP](https://i.imgur.com/nJzY3wi.jpeg)
-Style and weather scrapping are not yet implemented. Data gets updated automatically without refreshing the page.
+![WIP](https://i.imgur.com/826MJ0X.jpg)
+Style is not definitive. Data gets updated automatically without refreshing the page.
