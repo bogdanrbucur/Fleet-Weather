@@ -98,5 +98,5 @@ module.exports.getDestination = getDestination;
 module.exports.getArea = getArea;
 module.exports.getETA = getETA;
 module.exports.getAge = getAge;
-module.exports.ip = parseIP;
+module.exports.parseIP = parseIP;
 module.exports.coordinatesToURL = coordinatesToURL;
