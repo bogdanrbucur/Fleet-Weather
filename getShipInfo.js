@@ -11,26 +11,25 @@ function getShipInfo(name, imo, callback) {
 
   (async () => {
     try {
-    const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium-browser",
-    });
-    debug(`Puppeteer launch for VesselFinder.`);
-    const page = await browser.newPage();
-    await page.setUserAgent(
-      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
-    );
-    await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
-    debug(`Opened ${url}`);
+      const browser = await puppeteer.launch({
+        executablePath: "/usr/bin/chromium-browser",
+      }); // Chromium on Linux path
+      debug(`Puppeteer launch for VesselFinder.`);
+      const page = await browser.newPage();
+      await page.setUserAgent(
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
+      );
+      await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
+      debug(`Opened ${url}`);
 
-    // Get text where the vessel position is written (div class="text2")
-    shipInfoText = await page.$eval(".text2", (el) => el.innerText);
-    callback(shipInfoText); // Get the text from the element
-    debug(`Got text: ${shipInfoText}`);
+      // Get text where the vessel position is written (div class="text2")
+      shipInfoText = await page.$eval(".text2", (el) => el.innerText);
+      callback(shipInfoText); // Get the text from the element
+      debug(`Got text: ${shipInfoText}`);
 
-    await browser.close();
-    debug(`Closed VesselFinder.`);
-    }
-    catch(e) {
+      await browser.close();
+      debug(`Closed VesselFinder.`);
+    } catch (e) {
       debug("ERROR: ", e);
     }
   })();
