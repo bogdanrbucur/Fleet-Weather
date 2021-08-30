@@ -36,31 +36,33 @@ function getWeather(coordinates, callback) {
   debug(`Windy URL: ${url}`);
 
   (async () => {
-    const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium-browser",
-    });
-    debug(`Puppeteer launch for Windy.`);
-    const page = await browser.newPage();
-    await page.setUserAgent(
-      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
-    );
-    await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
-    debug(`Opened ${url}`);
-
-    let weather = await page.evaluate(() => {
-      // Get the DOM element that holds the wind gusts data
-      let windGustText = document.getElementsByClassName(
-        "td-gust height-gust d-display-table"
+    try {
+      const browser = await puppeteer.launch();
+      debug(`Puppeteer launch for Windy.`);
+      const page = await browser.newPage();
+      await page.setUserAgent(
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
       );
+      await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
+      debug(`Opened ${url}`);
 
-      let windGusts = windGustText[0].innerText.split("\t"); // Split string by \t (TAB) into all the wind gusts every 3 hours
-      return windGusts; // return array with all wind gusts
-    });
+      let weather = await page.evaluate(() => {
+        // Get the DOM element that holds the wind gusts data
+        let windGustText = document.getElementsByClassName(
+          "td-gust height-gust d-display-table"
+        );
 
-    callback(weather); // return wind gusts array
+        let windGusts = windGustText[0].innerText.split("\t"); // Split string by \t (TAB) into all the wind gusts every 3 hours
+        return windGusts; // return array with all wind gusts
+      });
 
-    await browser.close();
-    debug(`Closed Windy.`);
+      callback(weather); // return wind gusts array
+
+      await browser.close();
+      debug(`Closed Windy.`);
+    } catch (e) {
+      debug("ERROR: ", e);
+    }
   })();
 }
 
