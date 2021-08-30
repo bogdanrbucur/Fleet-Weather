@@ -1,7 +1,7 @@
 // Module to get the weather in ship's position
 
 const puppeteer = require("puppeteer");
-const { coordinatesToURL } = require("./parse"); // Import function from parse
+const { coordinatesToURL } = require("./parse");
 const debug = require("debug")("app:getWeather");
 
 function getWeather(coordinates, callback) {
