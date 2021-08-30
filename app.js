@@ -8,6 +8,8 @@ const Vessel = require("./vessel"); // class Vessel(name, IMO)
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
+app.enabled("trust proxy"); //
+
 app.use(cors()); // enable CORS for all routes
 app.use("/", home); // for home page, use home router
 app.use("/api/getships", home); // for home page, use home router
