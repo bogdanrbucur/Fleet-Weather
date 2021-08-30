@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const ships = require("../app");
 const debug = require("debug")("app:route");
-const parse = require("../parse");
+const { parseIP } = require("../parse"); // Import parseIP function from parse module
 
 router.get("/", (req, res) => {
-  let ip = parse.ip(req.ip);
+  // Get remote client IP
+  let ip = parseIP(req.ip);
   debug(`Remote client ${ip} connected.`);
   res.render("index", {
     // use to render HTML using a template engine like pug
@@ -15,7 +16,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/api/getships", (req, res) => {
-  let ip = parse.ip(req.ip);
+  // Get remote client IP
+  let ip = parseIP(req.ip);
   debug(`Remote client ${ip} requested update.`);
   res.status(200).send(ships.ships); // send the ships array to the client
 });
