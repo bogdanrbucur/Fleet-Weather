@@ -2,7 +2,7 @@ const express = require("express");
 const home = require("./routes/home");
 const app = express();
 const cors = require("cors");
-const debug = require("debug")("app:main"); // $env:DEBUG="app:*" to see all debugs
+const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
