@@ -63,6 +63,35 @@ function parseIP(text) {
   return text.slice(startIndex, text.length);
 }
 
+function coordinatesToURL(text) {
+  coordArray = text.split("/"); // For using the name in the URL
+  lat = coordArray[0];
+  long = coordArray[1];
+
+  while (lat.includes(" ")) lat = lat.replace(" ", "");
+  while (long.includes(" ")) long = long.replace(" ", "");
+
+  // If latitude is N
+  if (lat.includes("N")) {
+    lat = lat.replace("N", "");
+    // If latitude is S
+  } else {
+    lat = lat.replace("S", "");
+    lat = "-" + lat;
+  }
+
+  // If longitude is E
+  if (long.includes("E")) {
+    long = long.replace("E", "");
+    // If longitude is W
+  } else {
+    long = long.replace("W", "");
+    long = "-" + long;
+  }
+
+  return `https://www.windy.com/${lat}/${long}?${lat},${long}`;
+}
+
 module.exports.getCoordinates = getCoordinates;
 module.exports.getSpeed = getSpeed;
 module.exports.getDestination = getDestination;
@@ -70,3 +99,4 @@ module.exports.getArea = getArea;
 module.exports.getETA = getETA;
 module.exports.getAge = getAge;
 module.exports.ip = parseIP;
+module.exports.coordinatesToURL = coordinatesToURL;
