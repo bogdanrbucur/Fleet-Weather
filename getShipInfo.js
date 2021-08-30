@@ -11,9 +11,7 @@ function getShipInfo(name, imo, callback) {
 
   (async () => {
     try {
-    const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium-browser",
-    });
+    const browser = await puppeteer.launch();
     debug(`Puppeteer launch for VesselFinder.`);
     const page = await browser.newPage();
     await page.setUserAgent(
