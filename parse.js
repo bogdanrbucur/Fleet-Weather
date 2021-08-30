@@ -58,9 +58,15 @@ function getETA(text) {
   return eta;
 }
 
+function parseIP(text) {
+  let startIndex = text.indexOf(":", 3) + 1;
+  return text.slice(startIndex, text.length);
+}
+
 module.exports.getCoordinates = getCoordinates;
 module.exports.getSpeed = getSpeed;
 module.exports.getDestination = getDestination;
 module.exports.getArea = getArea;
 module.exports.getETA = getETA;
 module.exports.getAge = getAge;
+module.exports.ip = parseIP;
