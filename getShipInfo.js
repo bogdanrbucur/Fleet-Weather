@@ -10,6 +10,7 @@ function getShipInfo(name, imo, callback) {
   const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
 
   (async () => {
+    try {
     const browser = await puppeteer.launch({
       executablePath: "/usr/bin/chromium-browser",
     });
@@ -28,6 +29,10 @@ function getShipInfo(name, imo, callback) {
 
     await browser.close();
     debug(`Closed VesselFinder.`);
+    }
+    catch(e) {
+      debug("ERROR: ", e);
+    }
   })();
 }
 
