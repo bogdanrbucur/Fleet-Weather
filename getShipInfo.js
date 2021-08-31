@@ -8,11 +8,10 @@ function getShipInfo(name, imo) {
   return new Promise((resolve, reject) => {
     name = name.replace(" ", "-"); // For using the name in the URL
     name = name.toUpperCase(); // For using the name in the URL
-  
+
     const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
-  
+
     (async () => {
-      try {
       const browser = await puppeteer.launch();
       debug(`Puppeteer launch for VesselFinder.`);
       const page = await browser.newPage();
@@ -21,21 +20,16 @@ function getShipInfo(name, imo) {
       );
       await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
       debug(`Opened ${url}`);
-  
+
       // Get text where the vessel position is written (div class="text2")
       shipInfoText = await page.$eval(".text2", (el) => el.innerText);
       resolve(shipInfoText); // Get the text from the element
       debug(`Got text: ${shipInfoText}`);
-  
+
       await browser.close();
       debug(`Closed VesselFinder.`);
-      }
-      catch(e) {
-        debug("ERROR: ", e);
-      }
     })();
   });
-
 }
 
 module.exports = getShipInfo;
