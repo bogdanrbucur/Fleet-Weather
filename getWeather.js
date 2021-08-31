@@ -11,7 +11,9 @@ function getWeather(coordinates) {
     debug(`Windy URL: ${url}`);
 
     (async () => {
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({
+        executablePath: "/usr/bin/chromium-browser",
+      }); // Chromium on Linux path
       debug(`Puppeteer launch for Windy.`);
       const page = await browser.newPage();
       await page.setUserAgent(
