@@ -23,7 +23,7 @@ function getShipInfo(name, imo) {
 
       // Get text where the vessel position is written (div class="text2")
       shipInfoText = await page.$eval(".text2", (el) => el.innerText);
-      resolve(shipInfoText); // Get the text from the element
+      callback(shipInfoText); // Get the text from the element
       debug(`Got text: ${shipInfoText}`);
 
       await browser.close();
