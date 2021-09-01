@@ -1,5 +1,6 @@
 const Http = new XMLHttpRequest(); // new object for AJAX magic
-const url = "http://bucurbr.go.ro:3000/api/getships"; // endpoint to get updated ship info
+const { updateEndpoint } = require("../config"); // endpoint to get updated ship info
+// const updateEndpoint = "http://bucurbr.go.ro:3000/api/getships";
 
 const shiplistDiv = document.querySelector("div.shiplist"); // Find the shiplist div in pug
 
@@ -134,7 +135,7 @@ function appendShips(ship) {
 
 // HTTP GET method to update ships data
 function getShipsUpdate() {
-  Http.open("GET", url);
+  Http.open("GET", updateEndpoint);
   Http.send();
 
   Http.onreadystatechange = function () {

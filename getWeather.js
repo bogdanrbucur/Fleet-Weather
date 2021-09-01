@@ -3,6 +3,7 @@
 const puppeteer = require("puppeteer");
 const { coordinatesToURL } = require("./parse"); // Import function from parse
 const debug = require("debug")("app:getWeather");
+const {chromiumPath} = require("./config");
 
 function getWeather(coordinates) {
   // function returns a promise
@@ -11,9 +12,7 @@ function getWeather(coordinates) {
     debug(`Windy URL: ${url}`);
 
     (async () => {
-      const browser = await puppeteer.launch({
-        executablePath: "/usr/bin/chromium-browser",
-      }); // Chromium on Linux path
+      const browser = await puppeteer.launch(chromiumPath); // Chromium on Linux path
       debug(`Puppeteer launch for Windy.`);
       const page = await browser.newPage();
       await page.setUserAgent(

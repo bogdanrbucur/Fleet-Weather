@@ -1,10 +1,10 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const home = require("./routes/home");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+const {dbURL, port} = require("./config");
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
 app.set("view engine", "pug"); // Express loads pug
@@ -12,9 +12,9 @@ app.set("views", "./views"); // Set views path
 
 app.enabled("trust proxy"); // To be able to use req.ip from Express
 
-mongoose.connect("mongodb://localhost/fleetweather")
-  .then(() => debug("Connected to MongoDB"))
-  .catch(err => debug("Could not connect to MongoDB", err))
+// mongoose.connect(dbURL)
+//   .then(() => debug("Connected to MongoDB"))
+//   .catch(err => debug("Could not connect to MongoDB", err))
 
 app.use(cors()); // enable CORS for all routes
 app.use("/", home); // for home page, use home router
@@ -51,7 +51,6 @@ function updateShips() {
 updateShips();
 
 // Read PORT from environment
-const port = process.env.PORT || 3000;
 app.listen(port, () => debug(`Listening on port ${port}...`));
 
 module.exports.ships = ships;
