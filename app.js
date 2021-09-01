@@ -9,6 +9,7 @@ const {port} = require("./config");
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
+
 app.enabled("trust proxy"); // To be able to use req.ip from Express
 
 app.use(cors()); // enable CORS for all routes
