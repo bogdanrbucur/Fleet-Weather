@@ -3,18 +3,13 @@ const home = require("./routes/home");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
-const mongoose = require("mongoose");
-const {dbURL, port} = require("./config");
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
+const {port} = require("./config");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
 app.enabled("trust proxy"); // To be able to use req.ip from Express
-
-// mongoose.connect(dbURL)
-//   .then(() => debug("Connected to MongoDB"))
-//   .catch(err => debug("Could not connect to MongoDB", err))
 
 app.use(cors()); // enable CORS for all routes
 app.use("/", home); // for home page, use home router
