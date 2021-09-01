@@ -3,7 +3,7 @@ const home = require("./routes/home");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const {dbURL, port} = require("./config");
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
 
