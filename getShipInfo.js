@@ -2,7 +2,6 @@
 
 const puppeteer = require("puppeteer");
 const debug = require("debug")("app:getShipInfo");
-const {chromiumPath} = require("./config");
 
 function getShipInfo(name, imo) {
   // function returns a promise
@@ -13,7 +12,7 @@ function getShipInfo(name, imo) {
     const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
 
     (async () => {
-      const browser = await puppeteer.launch(chromiumPath); // Chromium on Linux path
+      const browser = await puppeteer.launch(); // Chromium on Linux path
       debug(`Puppeteer launch for VesselFinder.`);
       const page = await browser.newPage();
       await page.setUserAgent(
