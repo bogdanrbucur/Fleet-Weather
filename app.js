@@ -4,11 +4,13 @@ const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const Vessel = require("./vessel"); // class Vessel(name, IMO)
+const {port} = require("./config");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
-app.enabled("trust proxy"); //
+
+app.enabled("trust proxy"); // To be able to use req.ip from Express
 
 app.use(cors()); // enable CORS for all routes
 app.use("/", home); // for home page, use home router
@@ -45,7 +47,6 @@ function updateShips() {
 updateShips();
 
 // Read PORT from environment
-const port = process.env.PORT || 3000;
 app.listen(port, () => debug(`Listening on port ${port}...`));
 
 module.exports.ships = ships;
