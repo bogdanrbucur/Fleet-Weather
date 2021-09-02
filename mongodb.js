@@ -8,14 +8,24 @@ mongoose.connect(dbURL)
 const shipSchema = new mongoose.Schema({
   name: String,
   imo: Number,
-  area: String,
-  coordinates: String,
-  speed: Number,
-  destination: String,
-  eta: String,
-  dataAge: String,
-  windNow: Number,
-  wind6H: Number
+  area: {type: String, default: "Unavailable" },
+  coordinates: {type: String, default: "Unavailable" },
+  speed: {type: Number, default: 0},
+  destination: {type: String, default: "Unavailable" },
+  eta: {type: String, default: "Unavailable" },
+  dataAge: {type: String, default: "Not updated" },
+  windNow: {type: Number, default: 0},
+  wind6H: {type: Number, default: 0}
 });
 
 const Ship = mongoose.model("Ship", shipSchema);
+
+const ship = new Ship({
+  name: "Maersk Whatever",
+  imo: 123456789,
+  area: "",
+  coordinates: "",
+  speed: 0,
+  destination: "",
+  eta
+});
