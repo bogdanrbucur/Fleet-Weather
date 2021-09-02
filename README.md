@@ -13,8 +13,12 @@ Tools used:
 - [Bootstrap](https://github.com/twbs/bootstrap) for styling and reactive design
 - [Moment](https://github.com/moment/moment/) for keeping track of elapsed time on client side
 - [Debug](https://www.npmjs.com/package/debug) for debugging on server side
+- [MongoDB](https://www.mongodb.com/) noSQL database for storing the ships and their info
+- [Mongoose](https://www.npmjs.com/package/mongoose) for interfacing with MongoDB
 
 ![WIP](https://i.imgur.com/826MJ0X.jpg)
-Style is not definitive. Data gets updated automatically without refreshing the page.
+Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically.
 
-It currently runs on my Raspberry Pi 4 when it doesn't crash due to a Chromium memory leak and it needs its own branch because Puppeteer needs a launch parameter on Rasberry OS for Chromium's location.
+It currently runs on my Raspberry Pi 4 on Ubuntu Server x64 when it doesn't crash due to a Chromium memory leak. MongoDB runs locally on the Raspberry Pi.
+
+MongoDB only supports x64 architecture and thankfully there is an ARM64 version that runs on Nodejs10.
