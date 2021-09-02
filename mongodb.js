@@ -61,7 +61,7 @@ function getShips() {
         const ships = await Ship.find(); // Get all documents
         resolve(ships);
       } catch (err) {
-        debug("ERROR:", err);
+        debug(err);
       }
     })();
   });
@@ -107,10 +107,10 @@ async function updateShip(id) {
       wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
     });
 
-    debug("Updated:",ship);
-    ship.save();
+    const savedShip = await ship.save();
+    debug("Updated in database:", savedShip);
   } catch(err) {
-    debug("ERROR", err);
+    debug(err);
   }
 }
 
