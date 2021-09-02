@@ -79,35 +79,39 @@ function getShips() {
 }
 
 async function updateShip(id) {
-  // Get this ship by id
-  const ship = await Ship.findById(id);
-  // Check if it exists
-  if (!ship) {
-    debug("Ship not found in DB ", id);
-    return;
+  try {
+    // Get this ship by id
+    const ship = await Ship.findById(id);
+    // Check if it exists
+    if (!ship) {
+      debug("Ship not found in DB ", id);
+      return;
+    }
+    // Get the shipInfoText from VesselFinder using the name and imo number
+    const shipInfoText = await getShipInfo(ship.name, ship.imo);
+
+    // Set ship properties using shipInfoText
+    ship.set({
+      area: getArea(shipInfoText),
+      coordinates: getCoordinates(shipInfoText),
+      speed: getSpeed(shipInfoText),
+      destination: getDestination(shipInfoText),
+      eta: getETA(shipInfoText),
+      dataAge: getAge(shipInfoText),
+    });
+    // Scrape Windy for weather
+    const weather = await getWeather(ship.coordinates);
+
+    ship.set({
+      windNow: parseFloat(weather[3]), // Corresponds to the wind gusts now in Windy
+      wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
+    });
+
+    debug(ship);
+    ship.save();
+  } catch(err) {
+    debug("ERROR", err);
   }
-  // Get the shipInfoText from VesselFinder using the name and imo number
-  const shipInfoText = await getShipInfo(ship.name, ship.imo);
-
-  // Set ship properties using shipInfoText
-  ship.set({
-    area: getArea(shipInfoText),
-    coordinates: getCoordinates(shipInfoText),
-    speed: getSpeed(shipInfoText),
-    destination: getDestination(shipInfoText),
-    eta: getETA(shipInfoText),
-    dataAge: getAge(shipInfoText),
-  });
-  // Scrape Windy for weather
-  const weather = await getWeather(ship.coordinates);
-
-  ship.set({
-    windNow: parseFloat(weather[3]), // Corresponds to the wind gusts now in Windy
-    wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
-  });
-
-  debug(ship);
-  ship.save();
 }
 
 module.exports = Ship;
