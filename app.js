@@ -17,15 +17,6 @@ app.use("/", home); // for home page, use home router
 app.use("/api/getships", home); // for home page, use home router
 app.options("/api/getships", cors()); // enable pre-flight request for this route
 
-// DEV array to store ships
-// let ships = [
-//   new Vessel("Bro Nibe", 9322700),
-//   new Vessel("Bro Nissum", 9340623),
-//   new Vessel("Maersk Maru", 9581447),
-// ];
-
-
-
 // function to continously update ships in array every interval
 async function updateShips() {
   const ships = await getShips(); // Get all ships in DB
@@ -52,5 +43,3 @@ updateShips();
 
 // Read PORT from environment
 app.listen(port, () => debug(`Listening on port ${port}...`));
-
-// module.exports.ships = ships;

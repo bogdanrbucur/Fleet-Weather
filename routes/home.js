@@ -6,6 +6,7 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 
 let ships; // Declared top level so it can be accessed anywhere in the module
 
+// Landing page
 router.get("/", (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
@@ -14,7 +15,7 @@ router.get("/", (req, res) => {
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
     ships = await getShips();
-    debug("Sent", ships);
+    debug("Sent updated ships from database");
   })();
 
   res.render("index", {
@@ -24,6 +25,7 @@ router.get("/", (req, res) => {
   });
 });
 
+// Update ships API
 router.get("/api/getships", (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
@@ -32,10 +34,10 @@ router.get("/api/getships", (req, res) => {
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
     ships = await getShips();
-    debug("Sent", ships);
+    debug("Sent updated ships from database");
   })();
 
-  res.status(200).send(ships); // send the ships array to the client
+  res.status(200).send(ships); // send the ships to the client
 });
 
 module.exports = router;

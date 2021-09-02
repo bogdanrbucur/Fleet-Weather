@@ -1,3 +1,5 @@
+// Module for interfacing with MongoDB via Mongoose and updating the ships in db
+
 const mongoose = require("mongoose");
 const { dbURL } = require("./config");
 const debug = require("debug")("app:db"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
