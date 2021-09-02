@@ -8,7 +8,6 @@ function getWeather(coordinates) {
   // function returns a promise
   return new Promise((resolve, reject) => {
     let url = coordinatesToURL(coordinates);
-    debug(`Windy URL: ${url}`);
 
     (async () => {
       const browser = await puppeteer.launch(); // Chromium on Raspberry Pi path
@@ -29,7 +28,7 @@ function getWeather(coordinates) {
         let windGusts = windGustText[0].innerText.split("\t"); // Split string by \t (TAB) into all the wind gusts every 3 hours
         return windGusts; // return array with all wind gusts
       });
-
+      debug(`Got weather:${weather}`);
       resolve(weather); // return wind gusts array
 
       await browser.close();

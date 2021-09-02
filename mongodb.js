@@ -55,7 +55,8 @@ function getShips() {
 
   return new Promise((resolve, reject) => {
     (async () => {
-      const ships = await Ship.find({},{name: 1, imo: 1}); // Get all documents but only get the name and IMO number
+      const ships = await Ship.find(); // Get all documents
+      debug(ships);
       resolve(ships);
     })();
   });
@@ -70,7 +71,6 @@ function getShips() {
   // .sort({name: 1}); // 1 = ascending order
   // .select({name, area}); // Get only name and area of the documents
   // .count() // Get the number of documents matching the critera
-  // console.log(ships);
 }
 
 async function updateShip(id) {
@@ -96,13 +96,13 @@ async function updateShip(id) {
   // Scrape Windy for weather
   const weather = await getWeather(ship.coordinates);
 
-  debug(`Got weather:${weather}`);
   ship.set({
     windNow: parseFloat(weather[3]), // Corresponds to the wind gusts now in Windy
     wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
   });
 
   debug(ship);
+  ship.save();
 }
 
 module.exports = Ship;

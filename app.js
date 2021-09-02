@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const {port} = require("./config");
-const { Ship, getShips, updateShip } = require("./mongodb");
+const { getShips, updateShip } = require("./mongodb");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
@@ -28,8 +28,7 @@ app.options("/api/getships", cors()); // enable pre-flight request for this rout
 
 // function to continously update ships in array every interval
 async function updateShips() {
-  const ships = await getShips();
-  debug(ships);
+  const ships = await getShips(); // Get all ships in DB
 
   let intervalToUpdateAllShips = 5; // minutes within which to update all ships
   let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
