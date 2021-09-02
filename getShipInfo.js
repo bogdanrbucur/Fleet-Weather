@@ -18,14 +18,14 @@ function getShipInfo(name, imo) {
       const page = await browser.newPage();
       await page.setUserAgent(
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
-      );
+      ); // Pretend it's a real browser
       await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
       debug(`Opened ${url}`);
 
       // Get text where the vessel position is written (div class="text2")
       shipInfoText = await page.$eval(".text2", (el) => el.innerText);
       resolve(shipInfoText); // Get the text from the element
-      debug(`Got text: ${shipInfoText}`);
+      debug(`Got text from VesselFinder: ${shipInfoText}`);
 
       await browser.close();
       debug(`Closed VesselFinder.`);

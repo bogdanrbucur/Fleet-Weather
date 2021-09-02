@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getShips } = require("../mongodb");
-const debug = require("debug")("app:route");
+const debug = require("debug")("app:router");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 
 let ships; // Declared top level so it can be accessed anywhere in the module
@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
     ships = await getShips();
-    debug("Sent updated ships from database");
+    debug("Sent updated ships from database to remote client.");
   })();
 
   res.render("index", {
@@ -34,7 +34,7 @@ router.get("/api/getships", (req, res) => {
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
     ships = await getShips();
-    debug("Sent updated ships from database");
+    debug("Sent updated ships from database to remote client.");
   })();
 
   res.status(200).send(ships); // send the ships to the client
