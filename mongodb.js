@@ -107,7 +107,7 @@ async function updateShip(id) {
       wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
     });
 
-    debug(ship);
+    debug("Updated:",ship);
     ship.save();
   } catch(err) {
     debug("ERROR", err);
