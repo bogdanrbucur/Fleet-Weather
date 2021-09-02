@@ -58,7 +58,6 @@ function getShips() {
   return new Promise((resolve, reject) => {
     (async () => {
       const ships = await Ship.find(); // Get all documents
-      debug(ships);
       resolve(ships);
     })();
   });
