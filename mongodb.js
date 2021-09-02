@@ -34,6 +34,7 @@ const shipSchema = new mongoose.Schema({
 
 const Ship = mongoose.model("Ship", shipSchema);
 
+// Future implementation
 async function createShip() {
   const ship = new Ship({
     name: "Maersk Whatever",
@@ -54,11 +55,14 @@ function getShips() {
   // lte (less than or equal to)
   // in
   // nin (not in)
-
   return new Promise((resolve, reject) => {
     (async () => {
-      const ships = await Ship.find(); // Get all documents
-      resolve(ships);
+      try {
+        const ships = await Ship.find(); // Get all documents
+        resolve(ships);
+      } catch (err) {
+        debug("ERROR:", err);
+      }
     })();
   });
 
