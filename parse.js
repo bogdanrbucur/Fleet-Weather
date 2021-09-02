@@ -1,4 +1,4 @@
-// Module to parse the text from the VesselFinder page
+// Contains functions to parse various texts in the app, mainly from VesselFinder
 
 function getArea(text) {
   let startIndex = text.indexOf("is at") + 6;
@@ -48,11 +48,11 @@ function getSpeed(text) {
 function getETA(text) {
   if (text.indexOf("there on") !== -1) {
     let startIndex = text.indexOf("there on") + 9;
-    let endIndex = startIndex + 13;
+    let endIndex = text.indexof(".", startIndex);
     eta = text.slice(startIndex, endIndex);
   } else if (text.indexOf("arrived at") !== -1) {
     let startIndex = text.indexOf(" on ") + 4;
-    let endIndex = startIndex + 13;
+    let endIndex = text.indexof(".", startIndex);
     eta = text.slice(startIndex, endIndex);
   } else eta = "Unavailable";
   return eta;
