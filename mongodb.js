@@ -45,7 +45,7 @@ async function createShip() {
   debug("Updated:", result);
 }
 
-function getShips() {
+async function getShips() {
   // MongoDB comparison operators
   // eq (equal)
   // ne (not equal)
@@ -55,16 +55,11 @@ function getShips() {
   // lte (less than or equal to)
   // in
   // nin (not in)
-  return new Promise((resolve, reject) => {
-    (async () => {
-      try {
-        const ships = await Ship.find(); // Get all documents
-        resolve(ships);
-      } catch (err) {
-        debug(err);
-      }
-    })();
-  });
+  try {
+    return await Ship.find(); // Get all documents
+  } catch (err) {
+  debug(err);
+  }
 
   // .find({name: "Bro Nibe"}); // Get documents matching criteria
   // .find({speed: { $gte: 10 } }); // Speed >= 10

@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
-    ships = await getShips();
+    ships = await getShips(); // Get ships from database
     debug("Sent updated ships from database to remote client.");
   })();
 
@@ -33,7 +33,7 @@ router.get("/api/getships", (req, res) => {
 
   // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
   (async () => {
-    ships = await getShips();
+    ships = await getShips(); // Get ships from database
     debug("Sent updated ships from database to remote client.");
   })();
 
