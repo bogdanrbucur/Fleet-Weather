@@ -48,11 +48,11 @@ function getSpeed(text) {
 function getETA(text) {
   if (text.indexOf("there on") !== -1) {
     let startIndex = text.indexOf("there on") + 9;
-    let endIndex = text.indexof(".", startIndex);
+    let endIndex = text.indexOf(".", startIndex);
     eta = text.slice(startIndex, endIndex);
   } else if (text.indexOf("arrived at") !== -1) {
     let startIndex = text.indexOf(" on ") + 4;
-    let endIndex = text.indexof(".", startIndex);
+    let endIndex = text.indexOf(".", startIndex);
     eta = text.slice(startIndex, endIndex);
   } else eta = "Unavailable";
   return eta;
