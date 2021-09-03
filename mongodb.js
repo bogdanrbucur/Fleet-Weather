@@ -26,9 +26,9 @@ const shipSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (v) {
-        return v && v.length === 9; // if v has a value and length of 9, validate it
+        return v && v.length === 7; // if v has a value and length of 7, validate it
       },
-      message: "IMO Number should be 9 digits.",
+      message: "IMO Number should be 7 digits.",
     },
   },
   area: { type: String, default: "Unavailable" },
