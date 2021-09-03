@@ -1,8 +1,6 @@
 // Module for interfacing with MongoDB via Mongoose and updating the ships in db
 
-const mongoose = require("mongoose");
-const { dbURL } = require("./config");
-const debug = require("debug")("app:db"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
+const debug = require("debug")("app:db-ships"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const {
   getSpeed,
   getCoordinates,
@@ -10,38 +8,10 @@ const {
   getDestination,
   getETA,
   getAge,
-} = require("./parse");
-const getShipInfo = require("./getShipInfo");
-const getWeather = require("./getWeather");
-
-mongoose
-  .connect(dbURL)
-  .then(() => debug("Connected to MongoDB"))
-  .catch((err) => debug("Could not connect to MongoDB", err));
-
-const shipSchema = new mongoose.Schema({
-  name: { type: String, required: true, uppercase: true, trim: true },
-  imo: {
-    type: Number,
-    required: true,
-    validate: {
-      validator: function (v) {
-        return v && v.toString().length === 7; // if v has a value and length of 7, validate it
-      },
-      message: "IMO Number should be 7 digits.",
-    },
-  },
-  area: { type: String, default: "Unavailable" },
-  coordinates: { type: String, default: "Unavailable" },
-  speed: { type: Number, default: 0 },
-  destination: { type: String, default: "Unavailable" },
-  eta: { type: String, default: "Unavailable" },
-  dataAge: { type: String, default: "Not updated" },
-  windNow: { type: Number, default: 0 },
-  wind6H: { type: Number, default: 0 },
-});
-
-const Ship = mongoose.model("Ship", shipSchema);
+} = require("../parse");
+const getShipInfo = require("../getShipInfo");
+const getWeather = require("../getWeather");
+const Ship = require("../models/ship"); // Get the Mongoose ship model
 
 // Future implementation
 async function createShip() {
@@ -126,12 +96,12 @@ async function updateShip(id) {
     });
 
     const savedShip = await ship.save();
-    debug("Updated in database:", savedShip);
+    debug("Updated in database:");
+    debug(savedShip);
   } catch (err) {
     debug(err);
   }
 }
 
-module.exports = Ship;
 module.exports.getShips = getShips;
 module.exports.updateShip = updateShip;

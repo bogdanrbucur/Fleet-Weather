@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const debug = require("debug")("app:router_Home");
+const debug = require("debug")("app:router-home");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 
 // Landing page - used to render the Pug template

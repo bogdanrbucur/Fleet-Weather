@@ -2,8 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
-const { getShips } = require("../mongodb");
-const debug = require("debug")("app:router_Ships");
+const { getShips } = require("../mongodb/ships");
+const debug = require("debug")("app:router-ships");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 const Joi = require("joi");
 
@@ -24,10 +24,9 @@ router.get("/", async (req, res) => {
 function validateShip(ship) {
   const schema = {
     name: Joi.string().min(3).max(50).required(),
-    imo: Joi.number().integer().positive().min(7).max(7)
+    imo: Joi.number().integer().positive().min(7).max(7),
   };
   return Joi.validate(ship, schema);
 }
 
 module.exports = router;
-

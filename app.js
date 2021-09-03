@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const {port} = require("./config");
-const { getShips, updateShip } = require("./mongodb");
+const { getShips, updateShip } = require("./mongodb/ships");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
