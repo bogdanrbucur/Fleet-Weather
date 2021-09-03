@@ -20,8 +20,8 @@ mongoose
   .catch((err) => debug("Could not connect to MongoDB", err));
 
 const shipSchema = new mongoose.Schema({
-  name: { type: String, required: true},
-  imo: { type: Number, required: true},
+  name: { type: String, required: true },
+  imo: { type: Number, required: true },
   area: { type: String, default: "Unavailable" },
   coordinates: { type: String, default: "Unavailable" },
   speed: { type: Number, default: 0 },
@@ -41,14 +41,22 @@ async function createShip() {
     imo: 123456789,
   });
 
-  const result = await ship.save(); // returns saved document
-  debug("Updated:", result);
+  try {
+    const result = await ship.save(); // returns saved document
+    debug("Updated:", result);
+  } catch (err) {
+    debug(err.message);
+  }
 }
 
 // Future implementation
 async function deleteShip(id) {
-  const result = await Ship.deleteOne({_id: id});
-  debug("DELETED: ", result);
+  try {
+    const result = await Ship.deleteOne({ _id: id });
+    debug("DELETED: ", result);
+  } catch (err) {
+    debug(err.message);
+  }
 }
 
 async function getShips() {
@@ -64,7 +72,7 @@ async function getShips() {
   try {
     return await Ship.find(); // Get all documents
   } catch (err) {
-  debug(err);
+    debug(err);
   }
 
   // .find({name: "Bro Nibe"}); // Get documents matching criteria
@@ -110,7 +118,7 @@ async function updateShip(id) {
 
     const savedShip = await ship.save();
     debug("Updated in database:", savedShip);
-  } catch(err) {
+  } catch (err) {
     debug(err);
   }
 }
