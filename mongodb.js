@@ -22,7 +22,16 @@ mongoose
 const shipSchema = new mongoose.Schema({
   // name: String,
   name: { type: String, required: true },
-  imo: { type: Number, required: true, minlength: 9, maxlength: 9 },
+  imo: {
+    type: Number,
+    required: true,
+    validate: {
+      validator: function (v) {
+        return v && v.length === 9; // if v has a value and length of 9, validate it
+      },
+      message: "IMO Number should be 9 digits.",
+    },
+  },
   area: { type: String, default: "Unavailable" },
   coordinates: { type: String, default: "Unavailable" },
   speed: { type: Number, default: 0 },
