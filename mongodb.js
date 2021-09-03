@@ -20,8 +20,9 @@ mongoose
   .catch((err) => debug("Could not connect to MongoDB", err));
 
 const shipSchema = new mongoose.Schema({
+  // name: String,
   name: { type: String, required: true },
-  imo: { type: Number, required: true },
+  imo: { type: Number, required: true, minlength: 9, maxlength: 9 },
   area: { type: String, default: "Unavailable" },
   coordinates: { type: String, default: "Unavailable" },
   speed: { type: Number, default: 0 },
