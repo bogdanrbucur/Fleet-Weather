@@ -4,12 +4,12 @@ const ships = require("./routes/ships");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
-const {port} = require("./config");
+const { port } = require("./config");
 const { getShips, updateShip } = require("./mongodb/ships");
+const quickStats = require("./quick-stats/index");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
-
 
 app.enabled("trust proxy"); // To be able to use req.ip from Express
 
@@ -29,6 +29,7 @@ async function updateShips() {
   let i = 0;
   function updateLoop(i) {
     if (i === ships.length) i = 0;
+    debug(quickStats()); // App uptime and total memory usage. Pesky memory leaks...
     debug(`Updating ship ${ships[i].name}.`);
     updateShip(ships[i]._id);
     i++;
