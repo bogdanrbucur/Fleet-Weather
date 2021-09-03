@@ -1,5 +1,6 @@
 const express = require("express");
 const home = require("./routes/home");
+const ships = require("./routes/ships");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
@@ -13,9 +14,10 @@ app.set("views", "./views"); // Set views path
 app.enabled("trust proxy"); // To be able to use req.ip from Express
 
 app.use(cors()); // enable CORS for all routes
+
 app.use("/", home); // for home page, use home router
-app.use("/api/getships", home); // for home page, use home router
-app.options("/api/getships", cors()); // enable pre-flight request for this route
+app.use("/api/ships", ships); // ships route
+app.options("/api/ships", cors()); // enable pre-flight request for this route
 
 // function to continously update ships in array every interval
 async function updateShips() {

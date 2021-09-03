@@ -1,39 +1,21 @@
+// Router module for landing page
+
 const express = require("express");
 const router = express.Router();
-const { getShips } = require("../mongodb");
-const debug = require("debug")("app:router");
+const debug = require("debug")("app:router_Home");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 
-let ships; // Declared top level so it can be accessed anywhere in the module
-
-// Landing page - async because await is used
-router.get("/", async (req, res) => {
+// Landing page - used to render the Pug template
+router.get("/", (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(`Remote client ${ip} connected.`);
 
-  // Get ships from MongoDB. Must wrap in an async in order to use await
-  ships = await getShips(); // Get ships from database
-  debug("Sent updated ships from database to remote client.");
-
   res.render("index", {
     // use to render HTML using a template engine like pug
     title: "Fleet Weather", // used in Pug
-    ships: ships, // used to send data in Pug
+    // ships: ships, // used to send data in Pug which is not implemented here because the JS script calls the getships API on document load anyway
   });
-});
-
-// Update ships API - async because await is used
-router.get("/api/getships", async (req, res) => {
-  // Get remote client IP
-  let ip = parseIP(req.ip);
-  debug(`Remote client ${ip} requested update.`);
-
-  // Get ships from MongoDB. Must wrap in an async in order to use await
-  ships = await getShips(); // Get ships from database
-  debug("Sent updated ships from database to remote client.");
-
-  res.status(200).send(ships); // send the ships to the client
 });
 
 module.exports = router;

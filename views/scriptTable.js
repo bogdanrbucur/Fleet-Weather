@@ -1,5 +1,5 @@
 const Http = new XMLHttpRequest(); // new object for AJAX magic
-const updateEndpoint = "http://bucurbr.go.ro:3000/api/getships"; // endpoint to get updated ship info
+const updateEndpoint = "http://bucurbr.go.ro:3000/api/ships"; // endpoint to Ships API
 
 const shiplistDiv = document.querySelector("div.shiplist"); // Find the shiplist div in pug
 
