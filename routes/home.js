@@ -6,17 +6,15 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 
 let ships; // Declared top level so it can be accessed anywhere in the module
 
-// Landing page
-router.get("/", (req, res) => {
+// Landing page - async because await is used
+router.get("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(`Remote client ${ip} connected.`);
 
-  // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
-  (async () => {
-    ships = await getShips(); // Get ships from database
-    debug("Sent updated ships from database to remote client.");
-  })();
+  // Get ships from MongoDB. Must wrap in an async in order to use await
+  ships = await getShips(); // Get ships from database
+  debug("Sent updated ships from database to remote client.");
 
   res.render("index", {
     // use to render HTML using a template engine like pug
@@ -25,17 +23,15 @@ router.get("/", (req, res) => {
   });
 });
 
-// Update ships API
-router.get("/api/getships", (req, res) => {
+// Update ships API - async because await is used
+router.get("/api/getships", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(`Remote client ${ip} requested update.`);
 
-  // Get ships from MongoDB. Must wrap in an anonymous async in order to use await
-  (async () => {
-    ships = await getShips(); // Get ships from database
-    debug("Sent updated ships from database to remote client.");
-  })();
+  // Get ships from MongoDB. Must wrap in an async in order to use await
+  ships = await getShips(); // Get ships from database
+  debug("Sent updated ships from database to remote client.");
 
   res.status(200).send(ships); // send the ships to the client
 });
