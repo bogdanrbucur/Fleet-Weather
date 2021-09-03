@@ -15,6 +15,7 @@ Tools used:
 - [Debug](https://www.npmjs.com/package/debug) for debugging on server side
 - [MongoDB](https://www.mongodb.com/) noSQL database for storing the ships and their info
 - [Mongoose](https://www.npmjs.com/package/mongoose) for interfacing with MongoDB
+- [Joi](https://www.npmjs.com/package/joi) for input validation
 
 ![WIP](https://i.imgur.com/826MJ0X.jpg)
 Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically.
