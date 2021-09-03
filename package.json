@@ -28,6 +28,7 @@
     "puppeteer": "^10.2.0"
   },
   "devDependencies": {
+    "jshint": "^2.13.1",
     "nodemon": "^2.0.12"
   }
 }

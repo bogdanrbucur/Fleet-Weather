@@ -25,7 +25,7 @@ function validateShip(ship) {
   const schema = {
     name: Joi.string().min(3).max(50).required(),
     imo: Joi.number().integer().positive().min(7).max(7)
-  }
+  };
   return Joi.validate(ship, schema);
 }
 
