@@ -26,7 +26,7 @@ const shipSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: function (v) {
-        return v && v.length === 7; // if v has a value and length of 7, validate it
+        return v && v.toString().length === 7; // if v has a value and length of 7, validate it
       },
       message: "IMO Number should be 7 digits.",
     },
@@ -121,8 +121,8 @@ async function updateShip(id) {
     const weather = await getWeather(ship.coordinates);
 
     ship.set({
-      windNow: parseFloat(weather[3]), // Corresponds to the wind gusts now in Windy
-      wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in 6H in Windy
+      windNow: parseFloat(weather[3]), // Corresponds to the wind gusts around he present in Windy
+      wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in about 6 hours in Windy
     });
 
     const savedShip = await ship.save();
