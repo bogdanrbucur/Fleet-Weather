@@ -11,7 +11,7 @@ const {
 } = require("../parse");
 const getShipInfo = require("../getShipInfo");
 const getWeather = require("../getWeather");
-const Ship = require("../models/ship"); // Get the Mongoose ship model
+const { Ship } = require("../models/ship"); // Get the Mongoose ship model
 
 // Future implementation
 async function createShip() {

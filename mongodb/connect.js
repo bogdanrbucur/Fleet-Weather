@@ -9,4 +9,4 @@ mongoose
   .then(() => debug("Connected to MongoDB"))
   .catch((err) => debug("Could not connect to MongoDB", err));
 
-  module.exports = mongoose;
+module.exports = mongoose;

@@ -1,6 +1,7 @@
 // Mongoose model for Ships in MongoDB
 
 const mongoose = require("../mongodb/connect"); // get the object created when connecting to MongoDB
+const Joi = require("joi");
 
 const shipSchema = new mongoose.Schema({
   name: { type: String, required: true, uppercase: true, trim: true },
@@ -26,4 +27,14 @@ const shipSchema = new mongoose.Schema({
 
 const Ship = mongoose.model("Ship", shipSchema);
 
-module.exports = Ship;
+// Joi function to validate a Ship input
+function validateShip(ship) {
+  const schema = {
+    name: Joi.string().min(3).max(50).required(),
+    imo: Joi.number().integer().positive().min(7).max(7),
+  };
+  return Joi.validate(ship, schema);
+}
+
+exports.Ship = Ship;
+exports.validateShip = validateShip; 

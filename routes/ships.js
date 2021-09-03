@@ -5,7 +5,6 @@ const router = express.Router();
 const { getShips } = require("../mongodb/ships");
 const debug = require("debug")("app:router-ships");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
-const Joi = require("joi");
 
 // Get all ships - async because await is used
 router.get("/", async (req, res) => {
@@ -19,14 +18,5 @@ router.get("/", async (req, res) => {
 
   res.status(200).send(ships); // send the ships to the client
 });
-
-// Joi function to validate a Ship input
-function validateShip(ship) {
-  const schema = {
-    name: Joi.string().min(3).max(50).required(),
-    imo: Joi.number().integer().positive().min(7).max(7),
-  };
-  return Joi.validate(ship, schema);
-}
 
 module.exports = router;
