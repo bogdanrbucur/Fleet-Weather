@@ -24,7 +24,6 @@ router.post("/", async (req, res) => {
 
   // Check if email already registered
   let user = await User.findOne({ email: req.body.email });
-  debug("User already registered:", user);
   if (user) return res.status(400).send("User already registered."); // 400 Bad request
 
   // Create and save to DB a new user
@@ -32,7 +31,7 @@ router.post("/", async (req, res) => {
 
   // Return it to the client
   res.status(200).send(_.pick(user, ["name", "email"])); // 200 Ok
-  debug(`Remote client ${ip} added new user to database.`, user);
+  debug(`Remote client ${ip} added new user to database:`, user.name, user.email);
 });
 
 module.exports = router;

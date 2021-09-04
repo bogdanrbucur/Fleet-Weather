@@ -3,7 +3,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 module.exports = {
-  updateEndpoint: process.env.UPDATE_ENDPOINT,
+  shipsEndpoint: process.env.SHIPS_ENDPOINT,
   port: process.env.PORT,
   dbURL: process.env.DB_URL
 };
