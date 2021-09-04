@@ -1,5 +1,6 @@
 // Router module for /users
 
+const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 const debug = require("debug")("app:router-users");
@@ -30,7 +31,7 @@ router.post("/", async (req, res) => {
   user = await createUser(req.body);
 
   // Return it to the client
-  res.status(200).send(user); // 200 Ok
+  res.status(200).send(_.pick(user, ["name", "email"])); // 200 Ok
   debug(`Remote client ${ip} added new user to database.`, user);
 });
 
