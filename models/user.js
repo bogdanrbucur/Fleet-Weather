@@ -2,6 +2,7 @@
 
 const mongoose = require("../mongodb/connect"); // get the object created when connecting to MongoDB
 const Joi = require("joi");
+const debug = require("debug")("app:model-user");
 
 const User = mongoose.model(
   "User",
@@ -25,12 +26,12 @@ const User = mongoose.model(
 
 // Joi function to validate a Ship input
 function validateUser(user) {
-  const schema = {
+  const schema = Joi.object({
     name: Joi.string().min(3).max(50).required(),
     email: Joi.string().min(3).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
-  };
-  return Joi.validate(user, schema);
+  });
+  return schema.validate(user);
 }
 
 exports.User = User;

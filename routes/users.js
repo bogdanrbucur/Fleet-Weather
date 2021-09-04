@@ -2,7 +2,6 @@
 
 const express = require("express");
 const router = express.Router();
-// const { getShips } = require("../mongodb/ships");
 const debug = require("debug")("app:router-users");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 const { User, validateUser } = require("../models/user");
@@ -12,25 +11,27 @@ const { createUser } = require("../mongodb/users");
 router.post("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(`Remote client ${ip} adding new user ${req.body}.`);
+  debug(
+    `Remote client ${ip} attempting to add new user ${JSON.stringify(
+      req.body
+    )}.`
+  );
 
   // Validate data from remote client
   const { error } = validateUser(req.body);
   if (error) return res.status(400).send(error.details[0].message); // 400 Bad request
 
   // Check if email already registered
-  let user = User.findOne({ email: req.body.email });
+  let user = await User.findOne({ email: req.body.email });
+  debug("User already registered:", user);
   if (user) return res.status(400).send("User already registered."); // 400 Bad request
 
-  // Create a new user
-  user = createUser(req.body);
-
-  // Save it to MongoDB
-  await user.save();
+  // Create and save to DB a new user
+  user = await createUser(req.body);
 
   // Return it to the client
   res.status(200).send(user); // 200 Ok
-  debug(`Remote client ${ip} added new user ${user} to database.`);
+  debug(`Remote client ${ip} added new user to database.`, user);
 });
 
 module.exports = router;

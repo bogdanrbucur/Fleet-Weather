@@ -4,11 +4,16 @@ const debug = require("debug")("app:db-users"); // $env:DEBUG="app:*" / export D
 const { User } = require("../models/user"); // Get the Mongoose user model
 
 async function createUser(body) {
-  return new User({
+  let user = new User({
     name: body.name,
     email: body.email,
     password: body.password,
   });
+  try {
+   return await user.save();
+  } catch (err) {
+    debug(err.message);
+  }
 }
 
 module.exports.createUser = createUser;
