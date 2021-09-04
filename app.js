@@ -1,6 +1,7 @@
 const express = require("express");
 const home = require("./routes/home");
 const ships = require("./routes/ships");
+const users = require("./routes/users");
 const app = express();
 const cors = require("cors");
 const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
@@ -17,6 +18,7 @@ app.use(cors()); // enable CORS for all routes
 
 app.use("/", home); // for home page, use home router
 app.use("/api/ships", ships); // ships route
+app.use("/api/users", users); // users route
 app.options("/api/ships", cors()); // enable pre-flight request for this route
 
 // function to continously update ships in array every interval
