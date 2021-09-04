@@ -1,4 +1,4 @@
-// Router module for /users
+// Router module for /api/users
 
 const _ = require("lodash");
 const express = require("express");
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   user = await createUser(req.body);
 
   // Return it to the client
-  res.status(200).send(_.pick(user, ["name", "email"])); // 200 Ok
+  res.send(_.pick(user, ["name", "email"])); // 200 Ok
   debug(`Remote client ${ip} added new user to database:`, user.name, user.email);
 });
 

@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   let ships = await getShips(); // Get ships from database
   debug("Sent updated ships from database to remote client.");
 
-  res.status(200).send(ships); // send the ships to the client
+  res.send(ships); // send the ships to the client
 });
 
 module.exports = router;
