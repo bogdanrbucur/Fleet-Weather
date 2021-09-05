@@ -7,12 +7,12 @@ const debug = require("debug")("app:router-users");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 const { User, validateUser } = require("../models/user");
 const { createUser } = require("../mongodb/users");
-const auth = ("../middleware/auth");
+const auth = require("../middleware/auth");
 
-// router.get("/me", auth, async (req, res) => {
-//   const user = await User.findById(req.user._id).select("-password");
-//   res.send(user);
-// });
+router.get("/me", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user);
+});
 
 // POST a new user - async because await is used
 router.post("/", async (req, res) => {
