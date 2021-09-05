@@ -20,7 +20,7 @@ Tools and npm modules used:
 - [bcrypt](https://www.npmjs.com/package/bcrypt) for password hashing
 - [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken) for generating and validating JWTs
 
-![WIP](https://i.imgur.com/826MJ0X.jpg)
+![WIP](https://i.imgur.com/T2CG9au.jpg)
 Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically.
 
 It currently runs on my Raspberry Pi 4 on Ubuntu Server x64 when it doesn't crash due to a Chromium memory leak. MongoDB runs locally on the Raspberry Pi.
