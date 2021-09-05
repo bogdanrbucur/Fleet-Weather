@@ -1,5 +1,6 @@
 // Router module for /api/auth
 
+const winston = require("winston");
 const express = require("express");
 const router = express.Router();
 const debug = require("debug")("app:router-users");
@@ -12,7 +13,7 @@ const bcrypt = require("bcrypt");
 router.post("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(
+  winston.info(
     `Remote client ${ip} attempting to login as ${JSON.stringify(
       req.body.email
     )}.`
@@ -31,7 +32,7 @@ router.post("/", async (req, res) => {
 
   const token = user.generateAuthToken(); // Generate jwt token
 
-  debug(`User ${user.email} logged in.`);
+  winston.info(`User ${user.email} logged in.`);
   res.send(token); // Delete the token on the client side for logging out
 });
 

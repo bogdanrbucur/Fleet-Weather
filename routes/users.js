@@ -1,5 +1,6 @@
 // Router module for /api/users
 
+const winston = require("winston");
 const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
@@ -19,7 +20,7 @@ router.get("/me", auth, async (req, res) => {
 router.post("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(
+  winston.info(
     `Remote client ${ip} attempting to add new user ${JSON.stringify(
       req.body
     )}.`
@@ -39,7 +40,7 @@ router.post("/", async (req, res) => {
   // Return it to the client
   const token = user.generateAuthToken(); // Generate jwt token
   res.header("x-auth-token", token).send(_.pick(user, ["name", "email"])); // Send the user jwt token in a custom header and the name and email in body
-  debug(
+  winston.warn(
     `Remote client ${ip} added new user to database:`,
     user.name,
     user.email

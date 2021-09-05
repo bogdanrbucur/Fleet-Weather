@@ -30,7 +30,7 @@
     "mongoose": "^5.13.8",
     "pug": "^3.0.2",
     "puppeteer": "^10.2.0",
-    "winston": "^3.3.3"
+    "winston": "^2.4.5"
   },
   "devDependencies": {
     "forever": "^4.0.1",

@@ -1,5 +1,6 @@
 // Router module for landing page
 
+const winston = require("winston");
 const express = require("express");
 const router = express.Router();
 const debug = require("debug")("app:router-home");
@@ -9,7 +10,7 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 router.get("/", (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(`Remote client ${ip} connected.`);
+  winston.info(`Remote client ${ip} connected.`);
 
   res.render("index", {
     // use to render HTML using a template engine like pug

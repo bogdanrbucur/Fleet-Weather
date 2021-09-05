@@ -1,5 +1,6 @@
 // Router module for /api/ships
 
+const winston = require("winston");
 const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
@@ -14,7 +15,7 @@ const privilege = require("../middleware/modifyShips");
 router.get("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(`Remote client ${ip} requested update.`);
+  winston.info(`Remote client ${ip} requested update.`);
 
   // Get ships from MongoDB. Must wrap in an async in order to use await
   let ships = await getShips(); // Get ships from database
@@ -27,7 +28,7 @@ router.get("/", async (req, res) => {
 router.post("/", [auth, privilege], async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
-  debug(
+  winston.info(
     `Remote client ${ip} attempting to add new ship ${JSON.stringify(
       req.body
     )}.`

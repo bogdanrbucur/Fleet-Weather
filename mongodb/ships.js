@@ -1,5 +1,6 @@
 // Module for interfacing with MongoDB via Mongoose and updating the ships in db
 
+const winston = require("winston");
 const debug = require("debug")("app:db-ships"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const {
   getSpeed,
@@ -21,10 +22,10 @@ async function createShip(body) {
   });
 
   try {
-    debug("Added ship:", ship);
+    winston.info("Added ship:", ship);
     return await ship.save(); // returns saved document
   } catch (err) {
-    debug(err.message);
+    winston.error(err.message);
   }
 }
 
@@ -32,9 +33,9 @@ async function createShip(body) {
 async function deleteShip(id) {
   try {
     const result = await Ship.deleteOne({ _id: id });
-    debug("DELETED: ", result);
+    winston.warn("DELETED: ", result);
   } catch (err) {
-    debug(err.message);
+    winston.error(err.message);
   }
 }
 
@@ -51,7 +52,7 @@ async function getShips() {
   try {
     return await Ship.find(); // Get all documents
   } catch (err) {
-    debug(err);
+    winston.error(err);
   }
 
   // .find({name: "Bro Nibe"}); // Get documents matching criteria
