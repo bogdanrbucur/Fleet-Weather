@@ -19,14 +19,14 @@ router.post("/", async (req, res) => {
   );
 
   // Validate data from remote client
-  const { error } = validateUser(req.body);
-  if (error) return res.status(400).send(error.details[0].message); // 400 Bad request
+  const { error } = validateUser(req.body); // Joi validation of client input
+  if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
 
   // Check if email already registered
-  let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("User already registered."); // 400 Bad request
+  let user = await User.findOne({ email: req.body.email }); // Find user in db by email
+  if (user) return res.status(400).send("User already registered."); // If there's already a user with the email, 400 Bad request
 
-  // Create and save to DB a new user
+  // Create and save to DB a new user and return it
   user = await createUser(req.body);
 
   // Return it to the client

@@ -13,22 +13,23 @@ router.post("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(
-    `Remote client ${ip} attempting to login with email ${JSON.stringify(
+    `Remote client ${ip} attempting to login as ${JSON.stringify(
       req.body.email
     )}.`
   );
 
   // Validate data from remote client
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message); // 400 Bad request
+  const { error } = validate(req.body); // Joi validation of client input
+  if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
 
   // Check if email already registered
-  let user = await User.findOne({ email: req.body.email }); // If the email is not in the db
-  if (!user) return res.status(400).send("Invalid email or password."); // 400 Bad request
+  let user = await User.findOne({ email: req.body.email }); // Find user in db by email
+  if (!user) return res.status(400).send("Invalid email or password."); // If no user, 400 Bad request
 
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send("Invalid email or password."); // 400 Bad request
+  const validPassword = await bcrypt.compare(req.body.password, user.password); // Compare hashed passwords
+  if (!validPassword) return res.status(400).send("Invalid email or password."); // If password incorrect, 400 Bad request
 
+  debug(`User ${user.email} logged in.`);
   res.send(true);
 });
 
