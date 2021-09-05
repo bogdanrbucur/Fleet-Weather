@@ -2,7 +2,7 @@
 
 const debug = require("debug")("app:db-users"); // $env:DEBUG="app:*" / export DEBUG="app:*" to see all debugs
 const { User } = require("../models/user"); // Get the Mongoose user model
-const hashPassword = require("../middleware/hash");
+const hashPassword = require("../hash");
 
 async function createUser(body) {
   let user = new User({
