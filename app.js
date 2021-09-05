@@ -15,7 +15,6 @@ const error = require("./middleware/error");
 
 winston.add(winston.transports.File, { filename: "logfile.log" });
 
-
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
 
@@ -44,8 +43,10 @@ function updateShips() {
     let intervalToUpdateAllShips = 10; // minutes within which to update all ships
     let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
 
-    if (i === ships.length) i = 0;
-    winston.info(quickStats()); // App uptime and total memory usage. Pesky memory leaks...
+    if (i === ships.length) {
+      i = 0;
+      winston.info(quickStats()); // App uptime and total memory usage. Pesky memory leaks...
+    }
     debug(`Updating ship ${ships[i].name}.`);
     updateShip(ships[i]._id);
     i++;
