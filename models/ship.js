@@ -29,12 +29,15 @@ const Ship = mongoose.model("Ship", shipSchema);
 
 // Joi function to validate a Ship input
 function validateShip(ship) {
-  const schema = {
-    name: Joi.string().min(3).max(50).required(),
-    imo: Joi.number().integer().positive().min(7).max(7),
-  };
-  return Joi.validate(ship, schema);
+  const schema = Joi.object({
+    name: Joi.string().min(3).max(80).required(),
+    imo: Joi.string()
+      .length(7)
+      .pattern(/^[0-9]+$/, "numbers")
+      .required(),
+  });
+  return schema.validate(ship);
 }
 
 exports.Ship = Ship;
-exports.validateShip = validateShip; 
+exports.validateShip = validateShip;

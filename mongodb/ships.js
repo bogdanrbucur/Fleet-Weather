@@ -14,15 +14,15 @@ const getWeather = require("../getWeather");
 const { Ship } = require("../models/ship"); // Get the Mongoose ship model
 
 // Future implementation
-async function createShip() {
-  const ship = new Ship({
-    name: "Maersk Whatever",
-    imo: 123456789,
+async function createShip(body) {
+  let ship = new Ship({
+    name: body.name,
+    imo: body.imo,
   });
 
   try {
-    const result = await ship.save(); // returns saved document
-    debug("Updated:", result);
+    debug("Added ship:", ship);
+    return await ship.save(); // returns saved document
   } catch (err) {
     debug(err.message);
   }
@@ -105,3 +105,4 @@ async function updateShip(id) {
 
 module.exports.getShips = getShips;
 module.exports.updateShip = updateShip;
+module.exports.createShip = createShip;

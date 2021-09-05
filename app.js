@@ -16,8 +16,8 @@ app.set("views", "./views"); // Set views path
 app.enabled("trust proxy"); // To be able to use req.ip from Express
 
 app.use(cors()); // enable CORS for all routes
-app.use(express.json()); //Used to parse JSON bodies
-// app.use(express.urlencoded()); //Parse URL-encoded bodies
+app.use(express.json()); // Used to parse JSON bodies
+// app.use(express.urlencoded()); // Parse URL-encoded bodies
 app.use("/", home); // for home page, use home router
 app.use("/api/ships", ships); // ships route
 app.use("/api/users", users); // users route
