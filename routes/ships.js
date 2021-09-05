@@ -11,20 +11,16 @@ const { Ship, validateShip } = require("../models/ship");
 const privilege = require("../middleware/modifyShips");
 
 // GET all ships - async because await is used
-router.get("/", async (req, res, next) => {
+router.get("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(`Remote client ${ip} requested update.`);
 
-  try {
-    // Get ships from MongoDB. Must wrap in an async in order to use await
-    let ships = await getShips(); // Get ships from database
-    debug("Sent updated ships from database to remote client.");
+  // Get ships from MongoDB. Must wrap in an async in order to use await
+  let ships = await getShips(); // Get ships from database
+  debug("Sent updated ships from database to remote client.");
 
-    res.send(ships); // send the ships to the client
-  } catch (ex) {
-    next(ex);
-  }
+  res.send(ships); // send the ships to the client
 });
 
 // POST a new ship - auth and then privilege are executed before the async route handler

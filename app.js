@@ -1,3 +1,5 @@
+require("express-async-errors"); // module to wrap all express routes in try-catch blocks. Just load and forget
+const winston = require("winston");
 const express = require("express");
 const home = require("./routes/home");
 const ships = require("./routes/ships");
@@ -10,6 +12,7 @@ const { port } = require("./config");
 const { getShips, updateShip } = require("./mongodb/ships");
 const quickStats = require("./quick-stats/index");
 const error = require("./middleware/error");
+
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
