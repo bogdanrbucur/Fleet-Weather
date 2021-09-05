@@ -13,7 +13,7 @@ const getShipInfo = require("../getShipInfo");
 const getWeather = require("../getWeather");
 const { Ship } = require("../models/ship"); // Get the Mongoose ship model
 
-// Future implementation
+// Create new ship and add it to DB
 async function createShip(body) {
   let ship = new Ship({
     name: body.name,
@@ -28,7 +28,7 @@ async function createShip(body) {
   }
 }
 
-// Future implementation
+// Delete a ship from DB
 async function deleteShip(id) {
   try {
     const result = await Ship.deleteOne({ _id: id });
@@ -106,3 +106,4 @@ async function updateShip(id) {
 module.exports.getShips = getShips;
 module.exports.updateShip = updateShip;
 module.exports.createShip = createShip;
+module.exports.deleteShip = deleteShip;
