@@ -110,7 +110,7 @@ function appendShips(ship) {
   shipWind6H.append(shipWind6HCircle);
 
   // Circle conditional formatting
-  if (ship.shipWind6H <= 16) shipWind6HCircle.id = "CircleGreen";
+  if (ship.wind6H <= 16) shipWind6HCircle.id = "CircleGreen";
   else if (ship.wind6H <= 27) shipWind6HCircle.id = "CircleYellow";
   else if (ship.wind6H <= 40) shipWind6HCircle.id = "CircleOrange";
   else if (ship.wind6H <= 50) shipWind6HCircle.id = "CircleRed";
