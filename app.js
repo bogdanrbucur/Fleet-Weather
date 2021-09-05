@@ -62,4 +62,4 @@ function updateShips() {
 updateShips();
 
 // Read PORT from environment
-app.listen(port, () => debug(`Listening on port ${port}...`));
+app.listen(port, () => winston.info(`Listening on port ${port}...`));
