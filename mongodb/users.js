@@ -17,4 +17,15 @@ async function createUser(body) {
   }
 }
 
+async function deleteUser(id) {
+  try {
+    const result = await User.findByIdAndRemove({ _id: id });
+    if(result) debug("DELETED user:", result.email);
+    return result;
+  } catch (err) {
+    debug(err.message);
+  }
+}
+
 module.exports.createUser = createUser;
+module.exports.deleteUser = deleteUser;

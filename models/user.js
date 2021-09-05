@@ -21,11 +21,20 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024,
   },
+  canModifyShips: Boolean,
+  canModifyUsers: Boolean,
 });
 
-// Add method to generate jwt auth token
-userSchema.methods.generateAuthToken = function() {
-  return jwt.sign({ _id: this._id }, jwtAuthKey);
+// Add method to generate jwt auth token containing user id, and its permissions
+userSchema.methods.generateAuthToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id,
+      canModifyShips: this.canModifyShips,
+      canModifyUsers: this.canModifyUsers,
+    },
+    jwtAuthKey
+  );
 };
 
 const User = mongoose.model("User", userSchema);

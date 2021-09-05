@@ -8,7 +8,7 @@ const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-// POST a new user - async because await is used
+// Login a user - async because await is used
 router.post("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
   const token = user.generateAuthToken(); // Generate jwt token
 
   debug(`User ${user.email} logged in.`);
-  res.send(token);
+  res.send(token); // Delete the token on the client side for logging out
 });
 
 function validate(req) {

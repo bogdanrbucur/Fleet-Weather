@@ -8,6 +8,7 @@ const debug = require("debug")("app:router-ships");
 const { parseIP } = require("../parse"); // Import parseIP function from parse module
 const auth = require("../middleware/auth");
 const { Ship, validateShip } = require("../models/ship");
+const privilege = require("../middleware/modifyShips");
 
 // GET all ships - async because await is used
 router.get("/", async (req, res) => {
@@ -22,8 +23,8 @@ router.get("/", async (req, res) => {
   res.send(ships); // send the ships to the client
 });
 
-// POST a new ship - auth is executed before the async route handler
-router.post("/", auth, async (req, res) => {
+// POST a new ship - auth and then privilege are executed before the async route handler
+router.post("/", [auth, privilege], async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
   debug(
