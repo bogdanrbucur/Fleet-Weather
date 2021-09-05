@@ -9,6 +9,7 @@ const debug = require("debug")("app:main"); // $env:DEBUG="app:*" / export DEBUG
 const { port } = require("./config");
 const { getShips, updateShip } = require("./mongodb/ships");
 const quickStats = require("./quick-stats/index");
+const error = require("./middleware/error");
 
 app.set("view engine", "pug"); // Express loads pug
 app.set("views", "./views"); // Set views path
@@ -24,6 +25,10 @@ app.use("/api/users", users); // users route
 app.use("/api/auth", auth); // users route
 app.options("/api/ships", cors()); // enable pre-flight request for this route
 app.options("/api/users", cors()); // enable pre-flight request for this route
+
+// Express.js error handling middleware. Runs after route handlers if called with next()
+// err is the argument passed in next(err)
+app.use(error);
 
 // function to continously update ships in array every interval
 function updateShips() {
