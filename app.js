@@ -41,7 +41,7 @@ function updateShips() {
   async function updateLoop(i) {
     const ships = await getShips(); // Get all ships in DB in every cycle
 
-    let intervalToUpdateAllShips = 5; // minutes within which to update all ships
+    let intervalToUpdateAllShips = 10; // minutes within which to update all ships
     let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
 
     if (i === ships.length) i = 0;
