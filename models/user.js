@@ -3,26 +3,32 @@
 const mongoose = require("../mongodb/connect"); // get the object created when connecting to MongoDB
 const Joi = require("joi");
 const debug = require("debug")("app:model-user");
+const jwt = require("jsonwebtoken");
+const { jwtAuthKey } = require("../config");
 
-const User = mongoose.model(
-  "User",
-  new mongoose.Schema({
-    name: { type: String, required: true, minlength: 3, maxlength: 50 },
-    email: {
-      type: String,
-      required: true,
-      minlength: 3,
-      maxlength: 255,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 5,
-      maxlength: 1024,
-    },
-  })
-);
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true, minlength: 3, maxlength: 50 },
+  email: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 255,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 1024,
+  },
+});
+
+// Add method to generate jwt auth token
+userSchema.methods.generateAuthToken = function() {
+  return jwt.sign({ _id: this._id }, jwtAuthKey);
+};
+
+const User = mongoose.model("User", userSchema);
 
 // Joi function to validate a Ship input
 function validateUser(user) {

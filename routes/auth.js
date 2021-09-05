@@ -7,8 +7,6 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { jwtAuthKey } = require("../config");
 
 // POST a new user - async because await is used
 router.post("/", async (req, res) => {
@@ -31,8 +29,7 @@ router.post("/", async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password); // Compare hashed passwords
   if (!validPassword) return res.status(400).send("Invalid email or password."); // If password incorrect, 400 Bad request
 
-  // Generate jwt token based on user id
-  const token = jwt.sign({ _id: user._id }, jwtAuthKey);
+  const token = user.generateAuthToken(); // Generate jwt token
 
   debug(`User ${user.email} logged in.`);
   res.send(token);
