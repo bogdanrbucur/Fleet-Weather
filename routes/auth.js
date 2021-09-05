@@ -7,6 +7,7 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // POST a new user - async because await is used
 router.post("/", async (req, res) => {
