@@ -1,5 +1,6 @@
 // Router module for /api/ships
 
+const _ = require("lodash");
 const express = require("express");
 const router = express.Router();
 const { getShips, createShip } = require("../mongodb/ships");
@@ -8,7 +9,7 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 const auth = require("../middleware/auth");
 const { Ship, validateShip } = require("../models/ship");
 
-// Get all ships - async because await is used
+// GET all ships - async because await is used
 router.get("/", async (req, res) => {
   // Get remote client IP
   let ip = parseIP(req.ip);
@@ -43,7 +44,7 @@ router.post("/", auth, async (req, res) => {
   ship = await createShip(req.body);
 
   // Return it to the client
-  res.send(ship.name, ship.imo); // Send the user jwt token in the header and the name and email in body
+  res.send(_.pick(ship, ["name", "imo"])); // Send the user jwt token in the header and the name and email in body
 });
 
 module.exports = router;

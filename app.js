@@ -26,14 +26,14 @@ app.options("/api/ships", cors()); // enable pre-flight request for this route
 app.options("/api/users", cors()); // enable pre-flight request for this route
 
 // function to continously update ships in array every interval
-async function updateShips() {
-  const ships = await getShips(); // Get all ships in DB
-
-  let intervalToUpdateAllShips = 5; // minutes within which to update all ships
-  let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
-
+function updateShips() {
   let i = 0;
-  function updateLoop(i) {
+  async function updateLoop(i) {
+    const ships = await getShips(); // Get all ships in DB in every cycle
+
+    let intervalToUpdateAllShips = 5; // minutes within which to update all ships
+    let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
+
     if (i === ships.length) i = 0;
     debug(quickStats()); // App uptime and total memory usage. Pesky memory leaks...
     debug(`Updating ship ${ships[i].name}.`);
