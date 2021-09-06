@@ -72,6 +72,7 @@ function appendShips(ship) {
   // let shipIMO = document.createElement("td"); // Don't render IMO number
   // shipIMO.innerText = ship.imo;
 
+  // Clickable element linking to Vessel Finder page
   let shipArea = document.createElement("td");
   let shipAreaLink = document.createElement("a");
   shipAreaLink.setAttribute(
@@ -82,8 +83,15 @@ function appendShips(ship) {
   shipAreaLink.innerText = ship.area;
   shipArea.append(shipAreaLink);
 
+  // Clickable element linking to Vessel Finder page
   let shipCoordinates = document.createElement("td");
-  shipCoordinates.innerText = ship.coordinates;
+  let shipCoordinatesLink = document.createElement("a");
+  shipCoordinatesLink.setAttribute("href",
+  `https://www.vesselfinder.com/?imo=${ship.imo}`);
+  shipCoordinatesLink.setAttribute("target", "_blank");
+  shipCoordinatesLink.innerText = ship.coordinates;
+  shipCoordinates.append(shipCoordinatesLink);
+
   let shipDestination = document.createElement("td");
   shipDestination.innerText = ship.destination;
   let shipSpeed = document.createElement("td");

@@ -46,6 +46,7 @@ td {
 td a {
   width: 100%;
   display: block;
+  text-decoration: none;
 }
 
 .WindCircle {
