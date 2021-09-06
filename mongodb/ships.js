@@ -13,7 +13,7 @@ const {
 const getShipInfo = require("../getShipInfo");
 const getWeather = require("../getWeather");
 const { Ship } = require("../models/ship"); // Get the Mongoose ship model
-const { coordinatesToURL } = require("../parse"); // Import function from parse
+const { coordinatesToWindyLink } = require("../parse"); // Import function from parse
 
 // Create new ship and add it to DB
 async function createShip(body) {
@@ -93,7 +93,7 @@ async function updateShip(id) {
     const weather = await getWeather(ship.coordinates);
 
     ship.set({
-      windyLink: coordinatesToURL(ship.coordinates), // Store the Windy link to ship's position for client reference
+      windyLink: coordinatesToWindyLink(ship.coordinates), // Store the Windy link to ship's position for client reference
       windNow: parseFloat(weather[3]), // Corresponds to the wind gusts around he present in Windy
       wind6H: parseFloat(weather[5]), // Corresponds to the wind gusts in about 6 hours in Windy
     });

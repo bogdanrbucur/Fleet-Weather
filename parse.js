@@ -63,6 +63,7 @@ function parseIP(text) {
   return text.slice(startIndex, text.length);
 }
 
+// Returns URL to be used by Puppeteer
 function coordinatesToURL(text) {
   coordArray = text.split("/"); // For using the name in the URL
   lat = coordArray[0];
@@ -92,6 +93,36 @@ function coordinatesToURL(text) {
   return `https://www.windy.com/${lat}/${long}?${lat},${long}`;
 }
 
+// Returns URL to be clicked on the client side. Shows some extra info
+function coordinatesToWindyLink (text) {
+  coordArray = text.split("/"); // For using the name in the URL
+  lat = coordArray[0];
+  long = coordArray[1];
+
+  while (lat.includes(" ")) lat = lat.replace(" ", "");
+  while (long.includes(" ")) long = long.replace(" ", "");
+
+  // If latitude is N
+  if (lat.includes("N")) {
+    lat = lat.replace("N", "");
+    // If latitude is S
+  } else {
+    lat = lat.replace("S", "");
+    lat = "-" + lat;
+  }
+
+  // If longitude is E
+  if (long.includes("E")) {
+    long = long.replace("E", "");
+    // If longitude is W
+  } else {
+    long = long.replace("W", "");
+    long = "-" + long;
+  }
+
+  return `https://www.windy.com/${lat}/${long}/meteogram?${lat},${long},8,i:pressure`;
+}
+
 module.exports.getCoordinates = getCoordinates;
 module.exports.getSpeed = getSpeed;
 module.exports.getDestination = getDestination;
@@ -100,3 +131,4 @@ module.exports.getETA = getETA;
 module.exports.getAge = getAge;
 module.exports.parseIP = parseIP;
 module.exports.coordinatesToURL = coordinatesToURL;
+module.exports.coordinatesToWindyLink = coordinatesToWindyLink;
