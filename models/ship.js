@@ -21,6 +21,7 @@ const shipSchema = new mongoose.Schema({
   destination: { type: String, default: "Unavailable" },
   eta: { type: String, default: "Unavailable" },
   dataAge: { type: String, default: "Not updated" },
+  windyLink: { type: String },
   windNow: { type: Number, default: 0 },
   wind6H: { type: Number, default: 0 },
 });
