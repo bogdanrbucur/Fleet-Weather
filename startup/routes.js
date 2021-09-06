@@ -10,7 +10,7 @@ const error = require("../middleware/error");
 
 module.exports = function (app) {
   app.set("view engine", "pug"); // Express loads pug
-  app.set("views", "../views"); // Set views path
+  app.set("views", "./views"); // Set views path
 
   app.enabled("trust proxy"); // To be able to use req.ip from Express
 
