@@ -4,7 +4,12 @@ const mongoose = require("../mongodb/connect"); // get the object created when c
 const Joi = require("joi");
 const debug = require("debug")("app:model-user");
 const jwt = require("jsonwebtoken");
-const { jwtAuthKey } = require("../config");
+const { jwtAuthKey } = require("../startup/config");
+
+// Throw error if there's no JWT key set in env var
+if (!jwtAuthKey) {
+  throw new Error("Fatal error. No JWT Key set as environment variable.");
+}
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true, minlength: 3, maxlength: 50 },

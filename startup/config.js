@@ -1,6 +1,6 @@
 // Module to import env variables
-
 const dotenv = require('dotenv');
+
 dotenv.config();
 module.exports = {
   shipsEndpoint: process.env.SHIPS_ENDPOINT,
