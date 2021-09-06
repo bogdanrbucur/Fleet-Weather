@@ -43,6 +43,11 @@ td {
   font-weight: 400;
 }
 
+td a {
+  width: 100%;
+  display: block;
+}
+
 .WindCircle {
   height: 50px;
   width: 50px;

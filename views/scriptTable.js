@@ -71,8 +71,17 @@ function appendShips(ship) {
   shipName.setAttribute("scope", "row"); // For Bootstrap
   // let shipIMO = document.createElement("td"); // Don't render IMO number
   // shipIMO.innerText = ship.imo;
+
   let shipArea = document.createElement("td");
-  shipArea.innerText = ship.area;
+  let shipAreaLink = document.createElement("a");
+  shipAreaLink.setAttribute(
+    "href",
+    `https://www.vesselfinder.com/?imo=${ship.imo}`
+  );
+  shipAreaLink.setAttribute("target", "_blank");
+  shipAreaLink.innerText = ship.area;
+  shipArea.append(shipAreaLink);
+
   let shipCoordinates = document.createElement("td");
   shipCoordinates.innerText = ship.coordinates;
   let shipDestination = document.createElement("td");
