@@ -19,9 +19,10 @@ Tools and npm modules used:
 - [Joi](https://www.npmjs.com/package/joi) for input validation
 - [bcrypt](https://www.npmjs.com/package/bcrypt) for password hashing
 - [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken) for generating and validating JWTs
+- [Winston](https://www.npmjs.com/package/winston) for logging
 
-![WIP](https://i.imgur.com/T2CG9au.jpg)
-Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically.
+![WIP](https://i.imgur.com/AfoVgru.jpg)
+Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically. Location, Position and Wind cells are clickable and link to Vessel Finder and Windy respectively.
 
 It currently runs on my Raspberry Pi 4 on Ubuntu Server x64 when it doesn't crash due to a Chromium memory leak. MongoDB runs locally on the Raspberry Pi.
 
