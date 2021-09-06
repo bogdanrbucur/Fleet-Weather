@@ -20,9 +20,8 @@ setInterval(function () {
 
 let tableHeaders = [
   "Ship Name",
-  "IMO Number",
   "Location",
-  "Coordinates",
+  "Position",
   "Destination",
   "Speed",
   "ETA",
@@ -70,8 +69,8 @@ function appendShips(ship) {
   let shipName = document.createElement("th");
   shipName.innerText = ship.name;
   shipName.setAttribute("scope", "row"); // For Bootstrap
-  let shipIMO = document.createElement("td");
-  shipIMO.innerText = ship.imo;
+  // let shipIMO = document.createElement("td"); // Don't render IMO number
+  // shipIMO.innerText = ship.imo;
   let shipArea = document.createElement("td");
   shipArea.innerText = ship.area;
   let shipCoordinates = document.createElement("td");
@@ -119,7 +118,7 @@ function appendShips(ship) {
   // Append all data to row
   shiplistTableBodyRow.append(
     shipName,
-    shipIMO,
+    // shipIMO,  Don't render IMO number
     shipArea,
     shipCoordinates,
     shipDestination,
