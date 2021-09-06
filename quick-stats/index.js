@@ -21,8 +21,6 @@ function memUse() {
   return `Memory usage: ${used} MB.`;
 }
 
-function quickStats() {
+module.exports = function () {
   return `${uptime()} ${memUse()}`;
-}
-
-module.exports = quickStats;
+};
