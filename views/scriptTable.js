@@ -105,7 +105,9 @@ function appendShips(ship) {
   // Wind now
   let shipWindNow = document.createElement("td");
   // Make a circle in the table cell
-  let shipWindNowCircle = document.createElement("span");
+  let shipWindNowCircle = document.createElement("a");
+  shipWindNowCircle.setAttribute("href", ship.windyLink);
+  shipWindNowCircle.setAttribute("target", "_blank");
   shipWindNowCircle.className = "WindCircle";
   shipWindNowCircle.innerText = ship.windNow;
   shipWindNow.append(shipWindNowCircle);
@@ -120,7 +122,9 @@ function appendShips(ship) {
   // Wind in 6 hours
   let shipWind6H = document.createElement("td");
   // Make a circle in the table cell
-  let shipWind6HCircle = document.createElement("span");
+  let shipWind6HCircle = document.createElement("a");
+  shipWind6HCircle.setAttribute("href", ship.windyLink);
+  shipWind6HCircle.setAttribute("target", "_blank");
   shipWind6HCircle.className = "WindCircle";
   shipWind6HCircle.innerText = ship.wind6H;
   shipWind6H.append(shipWind6HCircle);
