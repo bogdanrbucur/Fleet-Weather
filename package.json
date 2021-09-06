@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "forever": "^4.0.1",
+    "jest": "^27.1.0",
     "jshint": "^2.13.1",
     "nodemon": "^2.0.12"
   }
