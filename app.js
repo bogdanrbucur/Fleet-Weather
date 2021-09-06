@@ -13,6 +13,18 @@ const { getShips, updateShip } = require("./mongodb/ships");
 const quickStats = require("./quick-stats/index");
 const error = require("./middleware/error");
 
+// Handle uncaught exceptions (those outside a try-catch block) in the Node process
+process.on("uncaughtException", (ex) => {
+  winston.error(ex.message, ex);
+  process.exit(1); // anything but 0 means failure
+});
+
+// Handle unhandled rejections in the Node process (failed promises)
+process.on("unhandledRejection", (ex) => {
+  winston.error(ex.message, ex);
+  process.exit(1); // anything but 0 means failure
+});
+
 winston.add(winston.transports.File, { filename: "logfile.log" });
 
 app.set("view engine", "pug"); // Express loads pug
