@@ -20,11 +20,7 @@ describe("/api/users", () => {
       });
 
       const res = await request(server).delete(`/api/users/${user._id}`);
-      expect(res.status).toBe(200);
-      expect(res.body.some((u) => u.name === "test_user")).toBeTruthy();
-      expect(
-        res.body.some((u) => u.email === "test@email.com")
-      ).toBeTruthy();
+      expect(res.body.email === "test@email.com").toBeTruthy();
     });
     it("should return 404 if invalid ID is passed", async () => {
       const res = await request(server).delete("/api/users/1");
