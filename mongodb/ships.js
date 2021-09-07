@@ -23,7 +23,7 @@ async function createShip(body) {
   });
 
   try {
-    winston.info("Added ship:", ship);
+    winston.info(`Added ship ${ship.name}, IMO: ${ship.imo}`);
     return await ship.save(); // returns saved document
   } catch (err) {
     winston.error(err.message);

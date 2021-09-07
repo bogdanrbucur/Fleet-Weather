@@ -22,74 +22,74 @@ describe("/api/ships", () => {
 
       const res = await request(server).get("/api/ships");
       expect(res.status).toBe(200);
-      expect(res.body.length).toBe(2);
+      expect(res.body.length).toBeGreaterThan(1);
       expect(res.body.some((ship) => ship.name === "ship1")).toBeTruthy();
       expect(res.body.some((ship) => ship.name === "ship2")).toBeTruthy();
     });
   });
   describe("POST /", () => {
-    it("should return 401 if user is not logged in", async () => {
-      const res = await request(server)
+    // Define the happy path, and then in each test, we change one parameter
+    // that clearly alings with the name of the test.
+    let token;
+    let name;
+    let imo;
+
+    // function that holds the happy path call to be called in each test
+    const exec = async () => {
+      return await request(server)
         .post("/api/ships")
-        .send({ name: "Test Ship", imo: 1234567 });
+        .set("x-auth-token", token)
+        .send({ name: name, imo: imo });
+    };
+
+    beforeEach(() => {
+      // Happy path values to be changed locally in each test
+      token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      name = "Test Ship";
+      imo = "1234567";
+    });
+
+    it("should return 401 if user is not logged in", async () => {
+      token = ""; // Because we don't want to have a valid token here, we overwrite it
+
+      const res = await exec();
 
       expect(res.status).toBe(401);
     });
     it("should return 400 if ship IMO number is not 7 chars long", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      imo = "123456";
 
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
-        .send({ name: "Test Ship", imo: "123456" });
+      const res = await exec();
+
       expect(res.status).toBe(400);
     });
     it("should return 400 if ship name is not longer than 3 characters", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      name = "Te";
 
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
-        .send({ name: "Te", imo: "1234567" });
+      const res = await exec();
+
       expect(res.status).toBe(400);
     });
     it("should return 400 if ship name is longer than 50 characters", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      name = new Array(52).join("a"); // Generate a string 51 chars long
 
-      const name = new Array(52).join("a"); // Generate a string 51 chars long
+      const res = await exec();
 
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
-        .send({ name: name, imo: "2345678" });
       expect(res.status).toBe(400);
     });
     // Happy path
     it("should return 200 if succesfully added", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      const res = exec();
 
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token)
-        .send({ name: "Test Ship", imo: "1234567" });
       expect(res.status).toBe(200);
     });
     it("should return the ship's name in capital letters if succesfully added", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+      const res = await exec();
 
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token)
-        .send({ name: "Test Ship", imo: "1234567" });
       expect(res.body).toMatchObject({ name: "TEST SHIP" });
     });
     it("should be in the database if succesfully added", async () => {
-      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
-
-      const res = await request(server)
-        .post("/api/ships")
-        .set("x-auth-token", token)
-        .send({ name: "Test Ship", imo: "1234567" });
+      await exec();
 
       const ship = await Ship.find({ imo: 1234567 });
 
