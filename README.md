@@ -27,4 +27,4 @@ Style is not definitive. JS on the page calls home periodically to an API that c
 
 It currently runs on my Raspberry Pi 4 on Ubuntu Server x64 when it doesn't crash due to a Chromium memory leak. MongoDB runs locally on the Raspberry Pi.
 
-MongoDB only supports x64 architecture and thankfully there is an ARM64 version that runs on Nodejs10.
+MongoDB only supports x64 architecture and thankfully there is a Nodejs10 version that runs on ARM64.
