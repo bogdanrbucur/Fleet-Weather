@@ -12,7 +12,7 @@ Tools and npm modules used:
 - [Pug](https://github.com/pugjs) as template engine
 - [Bootstrap](https://github.com/twbs/bootstrap) for styling and reactive design
 - [Moment](https://github.com/moment/moment/) for keeping track of elapsed time on client side
-- [dotenv](https://www.npmjs.com/package/dotenv) for storing environment variables
+- [dotenv-flow](https://www.npmjs.com/package/dotenv-flow) for storing environment variables
 - [Debug](https://www.npmjs.com/package/debug) for debugging on server side
 - [MongoDB](https://www.mongodb.com/) noSQL database for storing the ships and their info
 - [Mongoose](https://www.npmjs.com/package/mongoose) for interfacing with MongoDB

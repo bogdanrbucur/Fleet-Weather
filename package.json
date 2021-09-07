@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "nodemon": "nodemon app.js",
-    "test": "jest"
+    "start": "NODE_ENV=development node app.js",
+    "nodemon": "NODE_ENV=development nodemon app.js",
+    "test": "NODE_ENV=test jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "debug": "^4.3.2",
-    "dotenv": "^10.0.0",
+    "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "joi": "^17.4.2",

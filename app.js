@@ -3,7 +3,7 @@ const app = express();
 const winston = require("winston");
 const { port } = require("./startup/config");
 
-require("./startup/logging"); // Call the module that handled all logging
+require("./startup/logging")(); // Call the module that handled all logging
 require("./startup/routes")(app); // Call the module that houses all routes
 require("./startup/updateLoop")(); // Call function to continously cycle through all ships and update them
 
