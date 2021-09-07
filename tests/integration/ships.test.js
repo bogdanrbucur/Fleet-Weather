@@ -9,8 +9,8 @@ describe("/api/ships", () => {
     server = require("../../app"); // Get the initialized server before each test
   });
   afterEach(async () => {
-    server.close(); // Close the server after each test
     await Ship.remove({}); // Clean the db of added ships
+    server.close(); // Close the server after each test
   });
   describe("GET /", () => {
     it("should return all ships", async () => {
