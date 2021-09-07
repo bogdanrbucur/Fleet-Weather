@@ -65,7 +65,7 @@ describe("/api/ships", () => {
       expect(res.status).toBe(400);
     });
     // Happy path
-    it("should return 200 and ship's name in capital letters if succesfully added", async () => {
+    it("should return 200 if succesfully added", async () => {
       const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
 
       const res = await request(server)
@@ -73,7 +73,27 @@ describe("/api/ships", () => {
         .set("x-auth-token", token)
         .send({ name: "Test Ship", imo: "1234567" });
       expect(res.status).toBe(200);
+    });
+    it("should return the ship's name in capital letters if succesfully added", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token)
+        .send({ name: "Test Ship", imo: "1234567" });
       expect(res.body).toMatchObject({ name: "TEST SHIP" });
+    });
+    it("should be in the database if succesfully added", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token)
+        .send({ name: "Test Ship", imo: "1234567" });
+
+      const ship = await Ship.find({ imo: 1234567 });
+
+      expect(ship).not.toBeNull();
     });
   });
 });
