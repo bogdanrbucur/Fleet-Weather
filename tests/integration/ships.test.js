@@ -40,7 +40,7 @@ describe("/api/ships", () => {
 
       const res = await request(server)
         .post("/api/ships")
-        .set("x-auth-token", token)
+        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
         .send({ name: "Test Ship", imo: "123456" });
       expect(res.status).toBe(400);
     });
@@ -49,8 +49,19 @@ describe("/api/ships", () => {
 
       const res = await request(server)
         .post("/api/ships")
-        .set("x-auth-token", token)
+        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
         .send({ name: "Te", imo: "1234567" });
+      expect(res.status).toBe(400);
+    });
+    it("should return 400 if ship name is longer than 50 characters", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const name = new Array(52).join("a"); // Generate a string 51 chars long
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token) // pass the jwt token in the header to have permission to operate on the db
+        .send({ name: name, imo: "2345678" });
       expect(res.status).toBe(400);
     });
     // Happy path

@@ -31,7 +31,7 @@ const Ship = mongoose.model("Ship", shipSchema);
 // Joi function to validate a Ship input
 function validateShip(ship) {
   const schema = Joi.object({
-    name: Joi.string().min(3).max(80).required(),
+    name: Joi.string().min(3).max(50).required(),
     imo: Joi.string()
       .length(7)
       .pattern(/^[0-9]+$/, "numbers")
