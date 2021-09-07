@@ -16,7 +16,7 @@ describe("/api/ships", () => {
     it("should return all ships", async () => {
       // Populate the db with some mock ships
       await Ship.collection.insertMany([
-        { name: "ship1", imo: 1234567 },
+        { name: "ship1", imo: 3456789 },
         { name: "ship2", imo: 2345678 },
       ]);
 
@@ -35,8 +35,8 @@ describe("/api/ships", () => {
     let imo;
 
     // function that holds the happy path call to be called in each test
-    const exec = async () => {
-      return await request(server)
+    const exec = () => {
+      return request(server)
         .post("/api/ships")
         .set("x-auth-token", token)
         .send({ name: name, imo: imo });
@@ -79,7 +79,7 @@ describe("/api/ships", () => {
     });
     // Happy path
     it("should return 200 if succesfully added", async () => {
-      const res = exec();
+      const res = await exec();
 
       expect(res.status).toBe(200);
     });

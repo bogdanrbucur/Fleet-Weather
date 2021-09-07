@@ -1,5 +1,6 @@
 const request = require("supertest");
 const { User } = require("../../models/user");
+const { Ship } = require("../../models/ship");
 
 describe("auth middleware", () => {
   beforeEach(() => {
