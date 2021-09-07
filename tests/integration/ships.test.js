@@ -10,7 +10,7 @@ describe("/api/ships", () => {
   });
   afterEach(async () => {
     await Ship.remove({}); // Clean the db of added ships
-    server.close(); // Close the server after each test
+    await server.close(); // Close the server after each test
   });
   describe("GET /", () => {
     it("should return all ships", async () => {
