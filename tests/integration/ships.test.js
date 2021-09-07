@@ -10,7 +10,7 @@ describe("/api/ships", () => {
   });
   afterEach(async () => {
     server.close(); // Close the server after each test
-    await Ship.remove({}); // Clean the db
+    await Ship.remove({}); // Clean the db of added ships
   });
   describe("GET /", () => {
     it("should return all ships", async () => {
@@ -43,6 +43,26 @@ describe("/api/ships", () => {
         .set("x-auth-token", token)
         .send({ name: "Test Ship", imo: "123456" });
       expect(res.status).toBe(400);
+    });
+    it("should return 400 if ship name is not longer than 3 characters", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token)
+        .send({ name: "Te", imo: "1234567" });
+      expect(res.status).toBe(400);
+    });
+    // Happy path
+    it("should return 200 and ship's name in capital letters if succesfully added", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token)
+        .send({ name: "Test Ship", imo: "1234567" });
+      expect(res.status).toBe(200);
+      expect(res.body).toMatchObject({ name: "TEST SHIP" });
     });
   });
 });
