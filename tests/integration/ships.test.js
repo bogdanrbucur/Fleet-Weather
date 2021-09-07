@@ -1,5 +1,6 @@
 const request = require("supertest");
 const { Ship } = require("../../models/ship");
+const { User } = require("../../models/user");
 
 let server;
 
@@ -24,6 +25,24 @@ describe("/api/ships", () => {
       expect(res.body.length).toBe(2);
       expect(res.body.some((ship) => ship.name === "ship1")).toBeTruthy();
       expect(res.body.some((ship) => ship.name === "ship2")).toBeTruthy();
+    });
+  });
+  describe("POST /", () => {
+    it("should return 401 if user is not logged in", async () => {
+      const res = await request(server)
+        .post("/api/ships")
+        .send({ name: "Test Ship", imo: 1234567 });
+
+      expect(res.status).toBe(401);
+    });
+    it("should return 400 if ship IMO number is not 7 chars long", async () => {
+      const token = new User({ canModifyShips: true }).generateAuthToken(); // Create new user jwt token that has permission to modify ships
+
+      const res = await request(server)
+        .post("/api/ships")
+        .set("x-auth-token", token)
+        .send({ name: "Test Ship", imo: "123456" });
+      expect(res.status).toBe(400);
     });
   });
 });

@@ -11,6 +11,20 @@ describe("/api/users", () => {
     server.close(); // Close the server after each test
     await User.remove({}); // Clean the db
   });
+  describe("POST /", () => {
+    it("should return saved user", async () => {
+      const res = await request(server)
+        .post("/api/users")
+        .send({ name: "name1", email: "test@email1.com", password: "123456" });
+      expect(res.email).toBe("test@email1.com");
+    });
+    it("should return 400 if user format is invalid", async () => {
+      const res = await request(server)
+        .post("/api/users")
+        .send({ name: "name1", email: "test@email1.com" });
+      expect(res).toBe(400);
+    });
+  });
   // describe("DELETE /:id", () => {
   //   it("should delete requested user", async () => {
   //     // Populate the db with some mock ships
@@ -28,18 +42,4 @@ describe("/api/users", () => {
   //     expect(res.status).toBe(404);
   //   });
   // });
-  describe("POST /", () => {
-    it("should return return saved user", async () => {
-      const res = await request(server)
-        .post("/api/users")
-        .send({ name: "name1", email: "test@email1.com", password: "123456" });
-      expect(res.email).toBe("test@email1.com");
-    });
-    it("should return 401 if user format is invalid", async () => {
-      const res = await request(server)
-        .post("/api/users")
-        .send({ name: "name1", email: "test@email1.com" });
-      expect(res).toBe(400);
-    });
-  });
 });
