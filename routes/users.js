@@ -10,6 +10,7 @@ const { User, validateUser } = require("../models/user");
 const { createUser, deleteUser } = require("../mongodb/users");
 const auth = require("../middleware/auth");
 const privilege = require("../middleware/modifyUsers");
+const validateObjectId = require("../middleware/validateObjectId");
 
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
 });
 
 // DELETE a user - auth and privilege middleware are run before async route handler
-router.delete("/:id", [auth, privilege], async (req, res) => {
+router.delete("/:id", [auth, privilege, validateObjectId], async (req, res) => {
   let user = await deleteUser(req.params.id);
 
   if (!user) return res.status(404).send("Requested user not found.");
