@@ -12,7 +12,6 @@ function getShipInfo(name, imo) {
     const url = `https://www.vesselfinder.com/vessels/${name}-IMO-${imo}`;
 
     (async () => {
-
       const browser = await puppeteer.launch(); // Chromium on Raspberry Pi path
       debug(`Puppeteer launch for VesselFinder.`);
       const page = await browser.newPage();
@@ -20,11 +19,10 @@ function getShipInfo(name, imo) {
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
       ); // Pretend it's a real browser
       try {
-      await page.goto(url, { waitUntil: "networkidle2" }); // Wait for the page to fully load
-      debug(`Opened ${url}`);
+        await page.goto(url, { waitUntil: "networkidle2" }); // Wait for the page to fully load
+        debug(`Opened ${url}`);
       } catch (ex) {
         winston.warn(ex.message);
-        continue;
       }
 
       // Get text where the vessel position is written (div class="text2")
