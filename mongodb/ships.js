@@ -74,7 +74,7 @@ async function updateShip(id) {
     const ship = await Ship.findById(id);
     // Check if it exists
     if (!ship) {
-      debug(`Ship with id ${id} not found in database.`);
+      winston.warn(`Ship with id ${id} not found in database.`)
       return;
     }
     // Get the shipInfoText from VesselFinder using the name and imo number
