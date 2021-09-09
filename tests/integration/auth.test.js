@@ -12,7 +12,7 @@ describe("auth middleware", () => {
   });
   afterEach(async () => {
     await User.remove({});
-    server.close(); // Close the server after each test
+    await server.close(); // Close the server after each test
   });
 
   describe("/api/ships", () => {

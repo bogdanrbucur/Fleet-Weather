@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Add method to generate jwt auth token containing user id, and its permissions
+// userSchema.statics.doStuff for Static methods
 userSchema.methods.generateAuthToken = function () {
   return jwt.sign(
     {
