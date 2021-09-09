@@ -106,10 +106,14 @@ async function modifyShip(id, body) {
       winston.warn(`Ship with id ${id} not found in database.`);
       return;
     }
+    winston.info(
+      `Modified ship: ${ship.name} -> ${body.name}, ${ship.imo} -> ${body.imo}.`
+    );
     ship.set({
       name: body.name,
       imo: body.imo,
     });
+
     return await ship.save();
   } catch (err) {
     winston.warn(err.message);
