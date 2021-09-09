@@ -48,19 +48,19 @@ describe("PUT /api/ships/:id", () => {
     const res = await editShip(ship._id);
     expect(res.status).toBe(401);
   });
-  it("should return 400 if ship name is invalid", async () => {
+  it("should return 402 if ship name is invalid", async () => {
     // Give invalid ship name
     name = "re";
 
     const res = await editShip(ship._id);
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(402);
   });
-  it("should return 400 if imo is invalid", async () => {
+  it("should return 402 if imo is invalid", async () => {
     // Give invalid imo
     imo = "123456";
 
     const res = await editShip(ship._id);
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(402);
   });
   it("should return 404 if ship not found", async () => {
     // Generate new ship id, different from ship already in db
@@ -74,5 +74,11 @@ describe("PUT /api/ships/:id", () => {
 
     const res = await editShip("invalid_id");
     expect(res.status).toBe(400);
+  });
+  it("should return 200 request is valid", async () => {
+    // Send valid request
+
+    const res = await editShip(ship._id);
+    expect(res.status).toBe(200);
   });
 });

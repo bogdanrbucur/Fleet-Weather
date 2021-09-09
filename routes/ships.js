@@ -47,19 +47,22 @@ router.post("/", [auth, privilege], async (req, res) => {
   ship = await createShip(req.body);
 
   // Return it to the client
-  res.send(_.pick(ship, ["name", "imo"])); // Send the user jwt token in the header and the name and email in body
+  // res.send(_.pick(ship, ["name", "imo"])); // Send the user jwt token in the header and the name and email in body
+  res.send(ship);
 });
 
 // PUT (edit) a ship - auth and then privilege are executed before the async route handler
 router.put("/:id", async (req, res) => {
-  const { error } = validateShip(req.body); // Joi validation of client input
-  if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
-
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(400).send("Invalid ID provided.");
 
   let ship = await Ship.findById(req.params.id);
   if (!ship) return res.status(404).send("Ship not found.");
+
+  const { error } = validateShip(req.body); // Joi validation of client input
+  if (error) return res.status(402).send(error.details[0].message); // if validation gives an error, 400 Bad request
+
+  return res.status(200).send();
 
   res.status(401).send("Unauthorized.");
 });
