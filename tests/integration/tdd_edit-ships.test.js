@@ -11,12 +11,12 @@ describe("PUT /api/ships/:id", () => {
   let shipId;
   let ship;
 
-  // The function we're testing
+  // Happy path function we're testing
   const editShip = (shipId) => {
     return request(server)
-      .put(`/api/ships/${shipId}`)
-      .set("x-auth-token", token)
-      .send({ name: name, imo: imo });
+      .put(`/api/ships/${shipId}`) // Give valid ship ID
+      .set("x-auth-token", token) // give valid auth token
+      .send({ name: name, imo: imo }); // give valid ship name and imo
   };
 
   // Function to add a ship before testing the edit function
@@ -51,6 +51,13 @@ describe("PUT /api/ships/:id", () => {
   it("should return 400 if ship name is invalid", async () => {
     // Give invalid ship name
     name = "re";
+
+    const res = await editShip(ship._id);
+    expect(res.status).toBe(400);
+  });
+  it("should return 400 if imo is invalid", async () => {
+    // Give invalid imo
+    imo = "123456";
 
     const res = await editShip(ship._id);
     expect(res.status).toBe(400);
