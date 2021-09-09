@@ -41,15 +41,6 @@ async function deleteShip(id) {
 }
 
 async function getShips() {
-  // MongoDB comparison operators
-  // eq (equal)
-  // ne (not equal)
-  // gt (greater than)
-  // gte (greater than or equal to)
-  // lt (less than)
-  // lte (less than or equal to)
-  // in
-  // nin (not in)
   try {
     return await Ship.find(); // Get all documents
   } catch (err) {
@@ -106,7 +97,27 @@ async function updateShip(id) {
   }
 }
 
+async function modifyShip(id, body) {
+  try {
+    // Get this ship by id
+    const ship = await Ship.findById(id);
+    // Check if it exists
+    if (!ship) {
+      winston.warn(`Ship with id ${id} not found in database.`);
+      return;
+    }
+    ship.set({
+      name: body.name,
+      imo: body.imo,
+    });
+    return await ship.save();
+  } catch (err) {
+    winston.warn(err.message);
+  }
+}
+
 module.exports.getShips = getShips;
 module.exports.updateShip = updateShip;
 module.exports.createShip = createShip;
 module.exports.deleteShip = deleteShip;
+module.exports.modifyShip = modifyShip;

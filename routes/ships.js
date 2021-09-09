@@ -52,7 +52,7 @@ router.post("/", [auth, privilege], async (req, res) => {
 });
 
 // PUT (edit) a ship - auth and then privilege are executed before the async route handler
-router.put("/:id", async (req, res) => {
+router.put("/:id", [auth, privilege], async (req, res) => {
   if (!mongoose.isValidObjectId(req.params.id))
     return res.status(400).send("Invalid ID provided.");
 
@@ -60,11 +60,11 @@ router.put("/:id", async (req, res) => {
   if (!ship) return res.status(404).send("Ship not found.");
 
   const { error } = validateShip(req.body); // Joi validation of client input
-  if (error) return res.status(402).send(error.details[0].message); // if validation gives an error, 400 Bad request
+  if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
 
-  return res.status(200).send();
+  const modifiedShip = await modifyShip(req.params.id, req.body);
 
-  res.status(401).send("Unauthorized.");
+  return res.status(200).send(modifiedShip);
 });
 
 module.exports = router;

@@ -31,7 +31,7 @@ describe("PUT /api/ships/:id", () => {
     server = require("../../app"); // Get the initialized server before each test
 
     token = new User({ canModifyShips: true }).generateAuthToken(); // Generate a valid jwt for a user with permission to modify ships
-    name = "Modified Ship Name";
+    name = "MODIFIED SHIP NAME";
     imo = "2345678";
 
     // Add mock ship to DB
@@ -42,25 +42,25 @@ describe("PUT /api/ships/:id", () => {
     await Ship.remove({}); // Clean the db of added ships
     await server.close(); // Close the server after each test
   });
-  it("should return 401 if client not logged in", async () => {
-    // Give no token
-    token = "";
+  // it("should return 401 if client not logged in", async () => {
+  //   // Give no token
+  //   token = "";
 
-    const res = await editShip(shipId);
-    expect(res.status).toBe(401);
-  });
-  it("should return 402 if ship name is invalid", async () => {
+  //   const res = await editShip(shipId);
+  //   expect(res.status).toBe(401);
+  // });
+  it("should return 400 if ship name is invalid", async () => {
     // Give invalid ship name
     name = "re";
     const res = await editShip(shipId);
-    expect(res.status).toBe(402);
+    expect(res.status).toBe(400);
   });
-  it("should return 402 if imo is invalid", async () => {
+  it("should return 400 if imo is invalid", async () => {
     // Give invalid imo
     imo = "123456";
 
     const res = await editShip(shipId);
-    expect(res.status).toBe(402);
+    expect(res.status).toBe(400);
   });
   it("should return 404 if ship not found", async () => {
     // Generate new ship id, different from ship already in db
@@ -75,10 +75,19 @@ describe("PUT /api/ships/:id", () => {
     const res = await editShip("invalid_id");
     expect(res.status).toBe(400);
   });
-  it("should return 200 request is valid", async () => {
-    // Send valid request
+  it("should return 403 request if user doesn't have permission to edit", async () => {
+    // Generate valid token but without edit permission
+    token = new User({ canModifyShips: false }).generateAuthToken();
 
     const res = await editShip(shipId);
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(403);
+  });
+  it("should change vessel name if input is valid", async () => {
+    // Send valid request
+
+    await editShip(shipId);
+
+    const modifiedShip = await Ship.findById(shipId);
+    expect(modifiedShip.name).toBe(name);
   });
 });
