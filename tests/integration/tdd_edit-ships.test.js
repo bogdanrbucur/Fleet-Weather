@@ -8,8 +8,8 @@ describe("PUT /api/ships/:id", () => {
   let token;
   let name;
   let imo;
+  let ship_response;
   let shipId;
-  let ship;
 
   // Happy path function we're testing
   const editShip = (shipId) => {
@@ -35,7 +35,8 @@ describe("PUT /api/ships/:id", () => {
     imo = "2345678";
 
     // Add mock ship to DB
-    ship = await addShip();
+    ship_response = await addShip();
+    shipId = ship_response.body._id;
   });
   afterEach(async () => {
     await Ship.remove({}); // Clean the db of added ships
@@ -45,28 +46,27 @@ describe("PUT /api/ships/:id", () => {
     // Give no token
     token = "";
 
-    const res = await editShip(ship._id);
+    const res = await editShip(shipId);
     expect(res.status).toBe(401);
   });
   it("should return 402 if ship name is invalid", async () => {
     // Give invalid ship name
     name = "re";
-
-    const res = await editShip(ship._id);
+    const res = await editShip(shipId);
     expect(res.status).toBe(402);
   });
   it("should return 402 if imo is invalid", async () => {
     // Give invalid imo
     imo = "123456";
 
-    const res = await editShip(ship._id);
+    const res = await editShip(shipId);
     expect(res.status).toBe(402);
   });
   it("should return 404 if ship not found", async () => {
     // Generate new ship id, different from ship already in db
-    ship._id = new mongoose.Types.ObjectId();
+    shipId = new mongoose.Types.ObjectId();
 
-    const res = await editShip(ship._id);
+    const res = await editShip(shipId);
     expect(res.status).toBe(404);
   });
   it("should return 400 if invalid id provided", async () => {
@@ -78,7 +78,7 @@ describe("PUT /api/ships/:id", () => {
   it("should return 200 request is valid", async () => {
     // Send valid request
 
-    const res = await editShip(ship._id);
+    const res = await editShip(shipId);
     expect(res.status).toBe(200);
   });
 });
