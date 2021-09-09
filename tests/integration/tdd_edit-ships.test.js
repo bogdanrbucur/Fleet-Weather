@@ -23,7 +23,7 @@ describe("PUT /api/ships/:id", () => {
     return request(server)
       .post(`/api/ships`)
       .set("x-auth-token", token)
-      .send({ name: "Initial Ship Name", imo: 7654321 });
+      .send({ name: "Initial Ship Name", imo: "7654321" });
   };
 
   beforeEach(async () => {
@@ -31,7 +31,7 @@ describe("PUT /api/ships/:id", () => {
 
     token = new User({ canModifyShips: true }).generateAuthToken(); // Generate a valid jwt for a user with permission to modify ships
     name = "Modified Ship Name";
-    imo = 2345678;
+    imo = "2345678";
 
   });
   afterEach(async () => {
@@ -44,6 +44,6 @@ describe("PUT /api/ships/:id", () => {
 
     // Confirm the ship is in db
     const res = await request(server).get("/api/ships");
-    expect(res).not.toBeNull();
+    expect(res.status).toBe(200);
   });
 });
