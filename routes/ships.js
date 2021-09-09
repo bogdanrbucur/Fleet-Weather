@@ -51,6 +51,9 @@ router.post("/", [auth, privilege], async (req, res) => {
 
 // PUT (edit) a ship - auth and then privilege are executed before the async route handler
 router.put("/:id", async (req, res) => {
+  const { error } = validateShip(req.body); // Joi validation of client input
+  if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
+
   res.status(401).send("Unauthorized.");
 });
 

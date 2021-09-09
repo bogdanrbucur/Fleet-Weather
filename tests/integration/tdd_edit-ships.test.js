@@ -48,4 +48,11 @@ describe("PUT /api/ships/:id", () => {
     const res = await editShip(ship._id);
     expect(res.status).toBe(401);
   });
+  it("should return 400 if ship name is invalid", async () => {
+    // Give invalid ship name
+    name = "re";
+
+    const res = await editShip(ship._id);
+    expect(res.status).toBe(400);
+  });
 });
