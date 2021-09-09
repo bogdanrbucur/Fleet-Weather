@@ -53,7 +53,7 @@ router.post("/", [auth, privilege], async (req, res) => {
 
 // PUT (edit) a ship - auth and then privilege are executed before the async route handler
 router.put("/:id", async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  if (!mongoose.isValidObjectId(req.params.id))
     return res.status(400).send("Invalid ID provided.");
 
   let ship = await Ship.findById(req.params.id);
