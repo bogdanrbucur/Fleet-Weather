@@ -62,4 +62,17 @@ describe("PUT /api/ships/:id", () => {
     const res = await editShip(ship._id);
     expect(res.status).toBe(400);
   });
+  it("should return 404 if ship not found", async () => {
+    // Generate new ship id, different from ship already in db
+    ship._id = new mongoose.Types.ObjectId();
+
+    const res = await editShip(ship._id);
+    expect(res.status).toBe(404);
+  });
+  it("should return 400 if invalid id provided", async () => {
+    // Give invalid ship ID
+
+    const res = await editShip("invalid_id");
+    expect(res.status).toBe(400);
+  });
 });

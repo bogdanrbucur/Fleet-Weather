@@ -10,6 +10,7 @@ const { parseIP } = require("../parse"); // Import parseIP function from parse m
 const auth = require("../middleware/auth");
 const { Ship, validateShip } = require("../models/ship");
 const privilege = require("../middleware/modifyShips");
+const mongoose = require("mongoose");
 
 // GET all ships - async because await is used
 router.get("/", async (req, res) => {
@@ -53,6 +54,12 @@ router.post("/", [auth, privilege], async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { error } = validateShip(req.body); // Joi validation of client input
   if (error) return res.status(400).send(error.details[0].message); // if validation gives an error, 400 Bad request
+
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send("Invalid ID provided.");
+
+  let ship = await Ship.findById(req.params.id);
+  if (!ship) return res.status(404).send("Ship not found.");
 
   res.status(401).send("Unauthorized.");
 });
