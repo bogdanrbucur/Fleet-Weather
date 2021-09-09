@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development node app.js",
     "nodemon": "NODE_ENV=development nodemon app.js",
-    "test": "NODE_ENV=test jest --coverage --maxWorkers=2"
+    "test": "NODE_ENV=test jest --coverage --maxWorkers=50%"
   },
   "repository": {
     "type": "git",

@@ -49,4 +49,9 @@ router.post("/", [auth, privilege], async (req, res) => {
   res.send(_.pick(ship, ["name", "imo"])); // Send the user jwt token in the header and the name and email in body
 });
 
+// PUT (edit) a ship - auth and then privilege are executed before the async route handler
+router.put("/:id", async (req, res) => {
+  res.status(401).send("Unauthorized.");
+});
+
 module.exports = router;

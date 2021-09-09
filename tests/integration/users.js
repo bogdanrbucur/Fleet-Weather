@@ -8,7 +8,7 @@ describe("/api/users", () => {
     server = require("../../app"); // Get the initialized server before each test
   });
   afterEach(async () => {
-    server.close(); // Close the server after each test
+    await server.close(); // Close the server after each test
     await User.remove({}); // Clean the db
   });
   describe("POST /", () => {

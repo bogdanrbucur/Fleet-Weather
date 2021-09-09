@@ -9,6 +9,7 @@ describe("PUT /api/ships/:id", () => {
   let name;
   let imo;
   let shipId;
+  let ship;
 
   // The function we're testing
   const editShip = (shipId) => {
@@ -33,17 +34,18 @@ describe("PUT /api/ships/:id", () => {
     name = "Modified Ship Name";
     imo = "2345678";
 
+    // Add mock ship to DB
+    ship = await addShip();
   });
   afterEach(async () => {
     await Ship.remove({}); // Clean the db of added ships
     await server.close(); // Close the server after each test
   });
-  it("should work!", async () => {
-    // Add mock ship to DB
-    const ship = await addShip();
+  it("should return 401 if client not logged in", async () => {
+    // Give no token
+    token = "";
 
-    // Confirm the ship is in db
-    const res = await request(server).get("/api/ships");
-    expect(res.status).toBe(200);
+    const res = await editShip(ship._id);
+    expect(res.status).toBe(401);
   });
 });
