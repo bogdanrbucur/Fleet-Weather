@@ -64,7 +64,7 @@ router.put("/:id", [auth, privilege], async (req, res) => {
 
   const modifiedShip = await modifyShip(req.params.id, req.body);
 
-  return res.status(200).send(modifiedShip);
+  return res.send(modifiedShip);
 });
 
 module.exports = router;
