@@ -1,15 +1,19 @@
 // Contains functions to parse various texts in the app, mainly from VesselFinder
 
 function getArea(text) {
-  let startIndex = text.indexOf("is at") + 6;
-  let endIndex = text.indexOf("(") - 1;
-  area = text.slice(startIndex, endIndex);
+  if (text.indexOf("(") !== -1) {
+    let startIndex = text.indexOf("is at") + 6;
+    let endIndex = text.indexOf("(") - 1;
+    area = text.slice(startIndex, endIndex);
+  } else area = "Unavailable";
   return area;
 }
 
 function getCoordinates(text) {
   let startIndex = text.indexOf("coordinates") + 12;
-  let endIndex = text.indexOf(")");
+  let endIndex;
+  if (text.indexOf(")") !== -1) endIndex = text.indexOf(")");
+  else endIndex = text.indexOf("reported") - 1;
   coordinates = text.slice(startIndex, endIndex);
   return coordinates;
 }
@@ -94,7 +98,7 @@ function coordinatesToURL(text) {
 }
 
 // Returns URL to be clicked on the client side. Shows some extra info
-function coordinatesToWindyLink (text) {
+function coordinatesToWindyLink(text) {
   coordArray = text.split("/"); // For using the name in the URL
   lat = coordArray[0];
   long = coordArray[1];
