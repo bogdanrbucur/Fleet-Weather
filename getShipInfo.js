@@ -2,6 +2,7 @@
 
 const puppeteer = require("puppeteer");
 const debug = require("debug")("app:getShipInfo");
+const winston = require("winston");
 
 function getShipInfo(name, imo) {
   // function returns a promise
