@@ -4,6 +4,8 @@ const puppeteer = require("puppeteer");
 const debug = require("debug")("app:getShipInfo");
 const winston = require("winston");
 
+const fs = require("fs");
+
 function getShipInfo(name, imo) {
   // function returns a promise
   return new Promise((resolve, reject) => {
@@ -13,9 +15,20 @@ function getShipInfo(name, imo) {
       const browser = await puppeteer.launch(); // Chromium on Raspberry Pi path
       debug(`Puppeteer launch for Marine Traffic.`);
       const page = await browser.newPage();
-      await page.setUserAgent(
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
-      ); // Pretend it's a real browser
+      // await page.setUserAgent(
+      //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+      // ); // Pretend it's a real browser
+
+      await page.setExtraHTTPHeaders({
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+        "upgrade-insecure-requests": "1",
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US,en;q=0.9,en;q=0.8",
+      });
+
       try {
         await page.goto(url, { waitUntil: "networkidle0" }); // Wait for the page to fully load
         debug(`Opened ${url}`);
@@ -23,16 +36,13 @@ function getShipInfo(name, imo) {
         winston.warn(ex.message);
       }
 
-      // Get text where the vessel information is in the page (id ="vesselDetails_summarySection")
-      const shipInfoText = await page.evaluate(() => {
-        // Get the DOM element that holds the wind gusts data
-        let text = document.getElementsByClassName(
-          "MuiGrid-root MuiGrid-container"
-        );
+      await page.waitForSelector("#vesselDetails_summarySection");
 
-        return Object.entries(text); // return array with all wind gusts
-        // return text; // return array with all wind gusts
-      });
+      // Get text where the vessel information is in the page (id ="vesselDetails_summarySection")
+      shipInfoText = await page.$eval(
+        "#vesselDetails_summarySection",
+        (el) => el.innerText
+      );
 
       resolve(shipInfoText); // Get the text from the element
       debug(`Got text from Marine Traffic: ${shipInfoText}`);
