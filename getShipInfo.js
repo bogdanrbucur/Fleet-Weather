@@ -1,4 +1,4 @@
-// Module to scrape VesselFinder for the ship info
+// Module to scrape Marine Traffic for the ship info
 
 const puppeteer = require("puppeteer");
 const debug = require("debug")("app:getShipInfo");
@@ -23,11 +23,17 @@ function getShipInfo(name, imo) {
         winston.warn(ex.message);
       }
 
-      // Get text where the vessel position is written (div class="text2")
-      shipInfoText = await page.$eval(
-        ".MuiCollapse-wrapperInner",
-        (el) => el.innerText
-      );
+      // Get text where the vessel information is in the page (id ="vesselDetails_summarySection")
+      const shipInfoText = await page.evaluate(() => {
+        // Get the DOM element that holds the wind gusts data
+        let text = document.getElementsByClassName(
+          "MuiGrid-root MuiGrid-container"
+        );
+
+        return Object.entries(text); // return array with all wind gusts
+        // return text; // return array with all wind gusts
+      });
+
       resolve(shipInfoText); // Get the text from the element
       debug(`Got text from Marine Traffic: ${shipInfoText}`);
 
