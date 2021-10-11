@@ -1,5 +1,5 @@
 // Module to import env variables
-require("dotenv").config();
+require("dotenv-flow").config();
 
 module.exports = {
   shipsEndpoint: process.env.SHIPS_ENDPOINT,
