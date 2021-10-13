@@ -28,3 +28,5 @@ Style is not definitive. JS on the page calls home periodically to an API that c
 It currently runs on my Raspberry Pi 4 on Ubuntu Server x64 when it doesn't crash due to a Chromium memory leak. MongoDB runs locally on the Raspberry Pi.
 
 MongoDB only supports x64 architecture and thankfully there is a Nodejs10 version that runs on ARM64.
+
+In the current dev environment there's a `crontab` job `@reboot sleep 10 && /home/ubuntu/_projects/Fleet-Weather/fleetweather.sh` that executes the bash script which calls the npm script `forever` set in `package.json` to ensure the app is up and running after the weekly Raspberry Pi restart.
