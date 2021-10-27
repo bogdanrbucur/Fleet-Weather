@@ -17,10 +17,10 @@ function getCoordinates(text) {
   if (text.indexOf(")") !== -1) endIndex = text.indexOf(")");
   else endIndex = text.indexOf("reported") - 1;
 
+  coordinates = text.slice(startIndex, endIndex);
   // ensure it doesn't capture some long text description of the start char is missing
-  if (coordinates.length <= 25) coordinates = text.slice(startIndex, endIndex);
-  else coordinates = "Unavailable";
-  return coordinates;
+  if (coordinates.length <= 25) return coordinates;
+  else return "Unavailable";
 }
 
 function getAge(text) {
