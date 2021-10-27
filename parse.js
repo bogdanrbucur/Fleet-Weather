@@ -1,12 +1,14 @@
 // Contains functions to parse various texts in the app, mainly from VesselFinder
 
 function getArea(text) {
-  if (text.indexOf("(") !== -1 && text.length <= 30) {
+  if (text.indexOf("(") !== -1) {
     let startIndex = text.indexOf("is at") + 6;
     let endIndex = text.indexOf("(") - 1;
     area = text.slice(startIndex, endIndex);
   } else area = "Unavailable";
-  return area;
+
+  if (area.length <= 30) return area;
+  else return "Unavailable";
 }
 
 function getCoordinates(text) {
