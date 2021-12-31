@@ -1,0 +1,153 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Fleet Weather",
+  "dateExported": "2021-12-31T14:28:35.358Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "containerId": "",
+      "sortNum": 10000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Register User",
+      "url": "bucurbr.go.ro:3000/api/users",
+      "method": "POST",
+      "modified": "2021-12-31T13:23:34.793Z",
+      "created": "2021-12-31T13:21:18.271Z",
+      "_id": "252f0102-47b6-435a-8b1d-7e8b5964fe0e",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Mohammed\",\n  \"email\": \"test1@gmail.com\",\n  \"password\": \"1234568\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 20000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Login",
+      "url": "bucurbr.go.ro:3000/api/auth",
+      "method": "POST",
+      "modified": "2021-12-31T13:24:42.951Z",
+      "created": "2021-12-31T13:24:04.948Z",
+      "_id": "a6697fd0-662a-484b-8349-ffbf89b27407",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test5@gmail.com\",\n  \"password\": \"1234568\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 30000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "x-auth-token", "value": "" }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Me",
+      "url": "bucurbr.go.ro:3000/api/users/me",
+      "method": "GET",
+      "modified": "2021-12-31T14:23:31.487Z",
+      "created": "2021-12-31T14:22:36.766Z",
+      "_id": "b3716162-dfe6-419b-a92a-810cc6943881",
+      "params": [],
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 40000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "x-auth-token", "value": "" }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Add new Ship",
+      "url": "bucurbr.go.ro:3000/api/ships",
+      "method": "POST",
+      "modified": "2021-12-31T14:26:22.704Z",
+      "created": "2021-12-31T14:24:07.892Z",
+      "_id": "a93fba4d-e930-4982-aa71-33c36c7e5341",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Bro Test\",\n  \"imo\": \"1234456\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 50000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "x-auth-token", "value": "" }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Delete User",
+      "url": "bucurbr.go.ro:3000/api/users/6134d22a6b3c8465c592125b",
+      "method": "DELETE",
+      "modified": "2021-12-31T14:26:43.973Z",
+      "created": "2021-12-31T14:25:56.954Z",
+      "_id": "29bb0a8c-fac3-4b5c-88e9-01ab3367a564",
+      "params": [],
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 60000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        { "name": "x-auth-token", "value": "" }
+      ],
+      "colId": "e1931615-05d2-4008-8b81-e3a024d9b5b3",
+      "name": "Edit ship",
+      "url": "bucurbr.go.ro:3000/api/ships/123",
+      "method": "PUT",
+      "modified": "2021-12-31T14:27:16.206Z",
+      "created": "2021-12-31T14:26:54.267Z",
+      "_id": "32000bd8-3785-40f4-bad6-b0be5dd306db",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\r\n    \"name\": \"Bro Test\",\r\n    \"imo\": \"1234456\"\r\n}",
+        "form": []
+      },
+      "tests": []
+    }
+  ]
+}
