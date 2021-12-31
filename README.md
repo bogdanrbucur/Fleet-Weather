@@ -21,6 +21,7 @@ Tools and npm modules used:
 - [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken) for generating and validating JWTs
 - [Winston](https://www.npmjs.com/package/winston) for logging
 - [Jest](https://jestjs.io/) for unit testing
+- [Thunder Client VSCode extension](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) for API calls testing
 
 ![WIP](https://i.imgur.com/AfoVgru.jpg)
 Style is not definitive. JS on the page calls home periodically to an API that calls an async function to pull all ships from the database and then the table data is updated dynamically. Location, Position and Wind cells are clickable and link to Vessel Finder and Windy respectively.
