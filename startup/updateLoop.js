@@ -9,7 +9,7 @@ module.exports = function updateShips() {
   async function updateLoop(i) {
     const ships = await getShips(); // Get all ships in DB in every cycle
 
-    let intervalToUpdateAllShips = 60; // minutes within which to update all ships
+    let intervalToUpdateAllShips = 180; // minutes within which to update all ships
     let interval = (intervalToUpdateAllShips / ships.length) * 60 * 1000;
 
     if (i === ships.length) {
